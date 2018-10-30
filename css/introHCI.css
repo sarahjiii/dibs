@@ -45,7 +45,7 @@ header{
 	width:100%;
 	background:#ffffff;
 	height:30px;
-	line-height:60px;
+	line-height:20px;
 	border-bottom:1px solid #dddddd;
 }
 .hamburger{
@@ -79,6 +79,6 @@ nav a:hover{text-decoration:none; color:#666;}
   margin-top:5px;
   margin:0 auto;
 }
-header{display:inline-block; font-size:12px;}
-span{padding-left:20px;}
+header{display:inline-block; font-size:14px;}
+span{padding-left:20px}
 a{color:#336699;}
