@@ -5,7 +5,7 @@
 
 /* applies to any <p> descendants of an element of class "example-class-selector" */
 .example-class-selector p {
-	/* Colors are in hexadecimal: http://www.colorpicker.com/ */	
+	/* Colors are in hexadecimal: http://www.colorpicker.com/ */
 	color: #CC00AA;
 }
 
@@ -30,7 +30,7 @@ body {
      bottom: 0;
      right: 0;
      position: absolute;
-     z-index: -1;	
+     z-index: -1;
 }
 
 .jumbotron p {
@@ -40,3 +40,45 @@ body {
 .project a {
      text-align: center;
 }
+
+header{
+	width:100%;
+	background:#ffffff;
+	height:30px;
+	line-height:60px;
+	border-bottom:1px solid #dddddd;
+}
+.hamburger{
+  background:none;
+  position:absolute;
+  top:0;
+  left:0;
+  line-height:45px;
+  padding:5px 15px 0px 15px;
+  color:#999;
+  border:0;
+  font-size:1.4em;
+  font-weight:bold;
+  cursor:pointer;
+  outline:none;
+  z-index:10000000000000;
+}
+
+nav{z-index:1000000; font-weight:bold; font-size:0.8em; width:100%; background:#f1f1f1;  position:absolute; text-align:center; font-size:12px;}
+nav ul {margin: 0; padding: 0; list-style-type: none; list-style-image: none;}
+nav li {display: block;   padding:15px 0 15px 0; border-bottom:#dddddd 1px solid;}
+nav li:hover{display: block;    background:#ffffff; padding:15px 0 15px 0; border-bottom:#dddddd 1px solid;}
+nav ul li a { text-decoration:none;  margin: 0px; color:#666;}
+nav ul li a:hover {  color: #666; text-decoration:none;}
+nav a{text-decoration:none; color:#666;}
+nav a:hover{text-decoration:none; color:#666;}
+
+.glyphicon-home{
+  color:white;
+  font-size:1.5em;
+  margin-top:5px;
+  margin:0 auto;
+}
+header{display:inline-block; font-size:12px;}
+span{padding-left:20px;}
+a{color:#336699;}

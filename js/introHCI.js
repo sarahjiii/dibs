@@ -11,6 +11,8 @@ function initializePage() {
 		$('.jumbotron h1').text("Javascript is connected");
 	});
 
-	// Add any additional listeners here
-	// example: $("#div-id").click(functionToCall);
+	$( "nav" ).hide();
+	$( ".hamburger" ).click(function() {
+		$( "nav" ).slideToggle( "slow", function() {});
+	});
 }

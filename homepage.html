@@ -1,6 +1,22 @@
 <!doctype html>
 
 <html>
+
+<header>
+  <button class="hamburger">&#9776;</button>
+
+</header>
+
+<nav>
+  <ul>
+    <a href="friends.html"><li>Friends</li></a>
+    <a href="myposts.html"><li>My Posts</li></a>
+    <a href="myclaims.html"><li>My Claims</li></a>
+    <a href="#"><li>Settings</li></a>
+    <a href="#"><li>Logout</li></a>
+  </ul>
+</nav>
+
 <head>
 	<title>Dibs App</title>
 	<meta charset="utf-8">
@@ -18,7 +34,7 @@
 		<!-- p means paragraph -->
 		<div class="jumbotron">
 			<h1>Dibs!</h1>
-			<button id="testjs" class="btn btn-primary btn-lg">Put something up for dibs</button>
+			<a href="posting.html"><button id="postButton" class="btn btn-primary btn-lg">Put something up for dibs</button>
 		</div>
 
 
@@ -79,5 +95,6 @@
   <!-- include JavaScript near the end of the HTML file -->
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script src="js/introHCI.js"></script>
 </body>
 </html>
