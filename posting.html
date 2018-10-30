@@ -1,6 +1,22 @@
 <!doctype html>
 
 <html>
+
+<header>
+  <button class="hamburger">&#9776;</button>
+</header>
+
+<nav>
+  <ul>
+		<a href="index.html"><li>Home</li></a>
+    <a href="friends.html"><li>Friends</li></a>
+    <a href="myposts.html"><li>My Posts</li></a>
+    <a href="myclaims.html"><li>My Claims</li></a>
+    <a href="#"><li>Settings</li></a>
+    <a href="#"><li>Logout</li></a>
+  </ul>
+</nav>
+
 <head>
 	<title>Dibs App</title>
 	<meta charset="utf-8">
@@ -18,9 +34,9 @@
 		<!-- p means paragraph -->
 		<div class="jumbotron">
 			<h1>Post</h1>
-      <textarea rows="2" cols="50" placeholder="What are you putting up for dibs?"></textarea>
-      <textarea rows="1" cols="50" placeholder="Location"></textarea>
-      <textarea rows="2" cols="50" placeholder="Write a caption..."></textarea>
+      <p><textarea placeholder="What are you putting up for dibs?"></textarea></p>
+      <p><textarea rows="1" cols="50" placeholder="Location"></textarea></p>
+      <p><textarea rows="2" cols="50" placeholder="Write a caption..."></textarea></p>
 			<div class="contains">
 				<p>Contains:</p>
 				<input type="checkbox" name="contains" value="dairy"> Dairy<br>
@@ -36,5 +52,6 @@
   <!-- include JavaScript near the end of the HTML file -->
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script src="js/introHCI.js"></script>
 </body>
 </html>
