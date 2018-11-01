@@ -17,6 +17,10 @@ body {
 		 background-color:#EAD1DCFF;
 }
 
+p {
+	text-align:center;
+}
+
 .jumbotron {
 	position: relative;
 	background: none;
@@ -40,6 +44,10 @@ body {
 
 .project a {
      text-align: center;
+}
+
+.small-img {
+  border-width: 100000px;
 }
 
 header{
