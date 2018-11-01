@@ -32,6 +32,9 @@ audio:not([controls]) {
   height: 0;
 }
 
+.button_left {
+   
+}
 [hidden],
 template {
   display: none;
