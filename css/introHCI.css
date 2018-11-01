@@ -46,6 +46,10 @@ p {
      text-align: center;
 }
 
+.small-img {
+  border-width: 100000px;
+}
+
 header{
 	width:100%;
 	background-color:#EAD1DCFF;
