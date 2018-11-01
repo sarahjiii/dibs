@@ -49,24 +49,9 @@ body {
 header{
 	width:100%;
 	background-color:#EAD1DCFF;
-	height:30px;
+	height:90px;
 	line-height:20px;
 	border-bottom:1px solid #dddddd;
-}
-.hamburger{
-  background:none;
-  position:absolute;
-  top:0;
-  left:0;
-  line-height:40px;
-  padding:5px 15px 0px 15px;
-  color:black;
-  border:0;
-  font-size:1.4em;
-  font-weight:bold;
-  cursor:pointer;
-  outline:none;
-  z-index:10000000000000;
 }
 
 nav{z-index:1000000; font-weight:bold; font-size:0.8em; width:100%; background:#f1f1f1;  position:absolute; text-align:center; font-size:12px;}
@@ -78,12 +63,12 @@ nav ul li a:hover {  color: #666; text-decoration:none;}
 nav a{text-decoration:none; color:#666;}
 nav a:hover{text-decoration:none; color:#666;}
 
-.homeButton {
+.hamburger{
 	background-color: #ffffff00; /* Transparent background */
 	border: none; /* Remove borders */
 	color: black; /* Black */
-	padding: 0px 0px 0px 0px; /* Some padding */
-	font-size: 20px; /* Set a font size */
+	padding: 0px 30px 0px 0px; /* Some padding */
+	font-size: 5em; /* Set a font size */
 	cursor: pointer; /* Mouse pointer on hover */
 }
 
@@ -91,8 +76,17 @@ nav a:hover{text-decoration:none; color:#666;}
 	background-color: #ffffff00; /* Transparent background */
 	border: none; /* Remove borders */
 	color: black; /* Black */
+	padding: 0px 30px 0px 0px; /* Some padding */
+	font-size: 5em; /* Set a font size */
+	cursor: pointer; /* Mouse pointer on hover */
+}
+
+.title {
+	background-color: #ffffff00; /* Transparent background */
+	border: none; /* Remove borders */
+	color: black; /* Black */
 	padding: 0px 0px 0px 0px; /* Some padding */
-	font-size: 1.4em; /* Set a font size */
+	font-size: 5em; /* Set a font size */
 	cursor: pointer; /* Mouse pointer on hover */
 }
 
@@ -100,10 +94,10 @@ nav a:hover{text-decoration:none; color:#666;}
 	background-color: #ffffff00; /* Transparent background */
 	border: none; /* Remove borders */
 	color: black; /* Black */
-	text-align: right;
 	padding: 0px 0px 0px 0px; /* Some padding */
-	font-size: 1.4em; /* Set a font size */
+	font-size: 5em; /* Set a font size */
 	cursor: pointer; /* Mouse pointer on hover */
+	float:right;
 }
 
 .glyphicon-home{
