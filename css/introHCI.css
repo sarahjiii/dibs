@@ -58,9 +58,9 @@ header{
   position:absolute;
   top:0;
   left:0;
-  line-height:45px;
+  line-height:40px;
   padding:5px 15px 0px 15px;
-  color:#999;
+  color:black;
   border:0;
   font-size:1.4em;
   font-weight:bold;
@@ -77,6 +77,34 @@ nav ul li a { text-decoration:none;  margin: 0px; color:#666;}
 nav ul li a:hover {  color: #666; text-decoration:none;}
 nav a{text-decoration:none; color:#666;}
 nav a:hover{text-decoration:none; color:#666;}
+
+.homeButton {
+	background-color: #ffffff00; /* Transparent background */
+	border: none; /* Remove borders */
+	color: black; /* Black */
+	padding: 0px 0px 0px 0px; /* Some padding */
+	font-size: 20px; /* Set a font size */
+	cursor: pointer; /* Mouse pointer on hover */
+}
+
+.homeButton {
+	background-color: #ffffff00; /* Transparent background */
+	border: none; /* Remove borders */
+	color: black; /* Black */
+	padding: 0px 0px 0px 0px; /* Some padding */
+	font-size: 1.4em; /* Set a font size */
+	cursor: pointer; /* Mouse pointer on hover */
+}
+
+.postButton {
+	background-color: #ffffff00; /* Transparent background */
+	border: none; /* Remove borders */
+	color: black; /* Black */
+	text-align: right;
+	padding: 0px 0px 0px 0px; /* Some padding */
+	font-size: 1.4em; /* Set a font size */
+	cursor: pointer; /* Mouse pointer on hover */
+}
 
 .glyphicon-home{
   color:white;
