@@ -17,6 +17,10 @@ body {
 		 background-color:#EAD1DCFF;
 }
 
+p {
+	text-align:center;
+}
+
 .jumbotron {
 	position: relative;
 	background: none;
