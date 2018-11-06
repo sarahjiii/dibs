@@ -3,16 +3,16 @@
 <html>
 
 <header>
-	<span>
-		<button class="hamburger"><i class="fa fa-bars"></i></button>
-		<a href="index.html"><button class="homeButton"><i class="fa fa-home"></i></button></a>
-		<a href="posting.html"><button class="postButton"><i class="fa fa-edit"></i></button></a>
-	</span>
+  <span>
+    <button class="hamburger"><i class="fa fa-bars"></i></button>
+    <a href="index.html"><button class="homeButton"><i class="fa fa-home"></i></button></a>
+    <a href="posting.html"><button class="postButton"><i class="fa fa-edit"></i></button></a>
+  </span>
 </header>
 
 <nav>
   <ul>
-		<a href="myposts.html"><li>My Posts</li></a>
+    <a href="myposts.html"><li>My Posts</li></a>
     <a href="myclaims.html"><li>My Claims</li></a>
     <a href="friends.html"><li>Friends</li></a>
     <a href="foodpref.html"><li>Food Preferences</li></a>
@@ -36,9 +36,19 @@
 		<!-- h1 through h6 are headers. The higher the number, the smaller the header -->
 		<!-- p means paragraph -->
 		<div class="jumbotron">
-			<h1>Friends</h1>
-      <textarea placeholder="Add a friend..."></textarea>
-			<p><button id="add" class="btn btn-primary btn-lg">Add</button></p>
+			<h1>Food Preferences</h1>
+      <p>Check all foods you don't eat</p>
+
+			<div class="pref">
+				<input type="checkbox" name="pref" value="dairy"> Dairy<br>
+				<input type="checkbox" name="pref" value="peanuts"> Peanuts<br>
+				<input type="checkbox" name="pref" value="pork"> Pork<br>
+				<input type="checkbox" name="pref" value="chicken"> Chicken<br>
+				<input type="checkbox" name="pref" value="beef"> Beef<br>
+				<input type="checkbox" name="pref" value="gluten"> Gluten<br>
+			</div>
+			<p><a href="index.html"><button id="testjs" class="btn btn-primary
+      btn-lg">Save</button></a></p>
 		</div>
 
   <!-- include JavaScript near the end of the HTML file -->
@@ -46,7 +56,7 @@
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/introHCI.js"></script>
 
-	<!-- Add icon library -->
+  <!-- Add icon library -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
 </body>
 </html>

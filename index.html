@@ -3,17 +3,22 @@
 <html>
 
 <header>
-  <button class="hamburger">&#9776;</button>
+  <span>
+    <button class="hamburger"><i class="fa fa-bars"></i></button>
+    <a href="index.html"><button class="homeButton"><i class="fa fa-home"></i></button></a>
+    <b class="title"> Dibs </b>
+    <a href="posting.html"><button class="postButton"><i class="fa fa-edit"></i></button></a>
 
+  </span>
 </header>
 
 <nav>
   <ul>
-    <a href="friends.html"><li>Friends</li></a>
     <a href="myposts.html"><li>My Posts</li></a>
     <a href="myclaims.html"><li>My Claims</li></a>
-    <a href="#"><li>Settings</li></a>
-    <a href="#"><li>Logout</li></a>
+    <a href="friends.html"><li>Friends</li></a>
+    <a href="foodpref.html"><li>Food Preferences</li></a>
+    <a href="login.html"><li>Logout</li></a>
   </ul>
 </nav>
 
@@ -33,68 +38,31 @@
 		<!-- h1 through h6 are headers. The higher the number, the smaller the header -->
 		<!-- p means paragraph -->
 		<div class="jumbotron">
-			<h1>Dibs!</h1>
-			<a href="posting.html"><button id="postButton" class="btn btn-primary btn-lg">Put something up for dibs</button>
 		</div>
 
 
-		<h4>Projects</h4>
 		<!-- divs are invisible structuring elements that stack vertically by default. Use them to organize your code -->
 		<!-- img tags are images. Lorem Pixel will deliver random images; handy! -->
 		<!-- a are anchors, also known as hyperlinks. Use the href attribute to tell the browser where to go when the user clicks -->
 		<div class="project" id="project1">
-			<a href="" class="thumbnail">
-				<img src="images/lorempixel.people.1.jpeg" alt="Lorem Pixel image" class="img">
-				<p>Waiting in Line</p>
-			</a>
-		</div>
-		<div class="project" id="project2">
-			<a href="#" class="thumbnail">
-				<img src="images/lorempixel.city.1.jpeg" alt="Lorem Pixel image" class="img">
-				<p>Needfinding</p>
-			</a>
-		</div>
-		<div class="project" id="project3">
-			<a href="#" class="thumbnail">
-				<img src="images/lorempixel.technics.1.jpeg" alt="Lorem Pixel image" class="img">
-				<p>Prototyping</p>
-			</a>
-		</div>
-		<div class="project" id="project4">
-			<a href="#" class="thumbnail">
-				<img src="images/lorempixel.abstract.1.jpeg" alt="Lorem Pixel image" class="img">
-				<p>Heuristic Evaluation</p>
-			</a>
-		</div>
-		<div class="project" id="project5">
-			<a href="#" class="thumbnail">
-				<img src="images/lorempixel.abstract.8.jpeg" alt="Lorem Pixel image" class="img">
-				<p>Visualization</p>
-			</a>
-		</div>
-		<div class="project" id="project6">
-			<a href="#" class="thumbnail">
-				<img src="images/lorempixel.people.2.jpeg" alt="Lorem Pixel image" class="img">
-				<p>Social design</p>
-			</a>
-		</div>
-		<div class="project" id="project7">
-			<a href="#" class="thumbnail">
-				<img src="images/lorempixel.technics.2.jpeg" alt="Lorem Pixel image" class="img">
-				<p>Gestural interaction</p>
-			</a>
-		</div>
-		<div class="project" id="project8">
-			<a href="#" class="thumbnail">
-				<img src="images/lorempixel.city.2.jpeg" alt="Lorem Pixel image" class="img">
-				<p>Design tools</p>
-			</a>
-		</div>
-	</div>
+			<a class="thumbnail">
+        <p style="font-size:20px"><b>meeta.cogs120</b></p>
+        <p>Geisel Library</p>
+				<img src="images/pizza.jpg" class="img-thumbnail">
+          <p><b>Pepperoni Pizza</b></p>
+          <p>Contains: pork, dairy</p>
+          <p>Claim by: 2:30 PM</p>
+          <button class="btn btn-success btn">CLAIM</button>
+  </a>
+  </div>
+
 
   <!-- include JavaScript near the end of the HTML file -->
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/introHCI.js"></script>
+
+  <!-- Add icon library -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
 </body>
 </html>

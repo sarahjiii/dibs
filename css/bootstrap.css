@@ -32,6 +32,9 @@ audio:not([controls]) {
   height: 0;
 }
 
+.button_left {
+   
+}
 [hidden],
 template {
   display: none;
@@ -5279,7 +5282,7 @@ a.list-group-item.active > .badge,
 .thumbnail a > img {
   display: block;
   height: auto;
-  max-width: 100%;
+  max-width: 10%;
   margin-right: auto;
   margin-left: auto;
 }

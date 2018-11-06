@@ -1,6 +1,25 @@
 <!doctype html>
 
 <html>
+
+<header>
+	<span>
+		<button class="hamburger"><i class="fa fa-bars"></i></button>
+		<a href="index.html"><button class="homeButton"><i class="fa fa-home"></i></button></a>
+		<a href="posting.html"><button class="postButton"><i class="fa fa-edit"></i></button></a>
+	</span>
+</header>
+
+<nav>
+  <ul>
+		<a href="myposts.html"><li>My Posts</li></a>
+    <a href="myclaims.html"><li>My Claims</li></a>
+    <a href="friends.html"><li>Friends</li></a>
+    <a href="foodpref.html"><li>Food Preferences</li></a>
+    <a href="login.html"><li>Logout</li></a>
+  </ul>
+</nav>
+
 <head>
 	<title>Dibs App</title>
 	<meta charset="utf-8">
@@ -19,21 +38,21 @@
 		<div class="jumbotron">
 			<h1>My Claims</h1>
 
-  		<div class="posst" id="post1">
-  			<a href="" class="thumbnail">
-  				<img src="images/lorempixel.people.1.jpeg" alt="Lorem Pixel image" class="img">
-  				<p>Pizza</p>
-  			</a>
-  		</div>
+
   		<div class="post" id="post2">
   			<a href="#" class="thumbnail">
-  				<img src="images/lorempixel.city.1.jpeg" alt="Lorem Pixel image" class="img">
-  				<p>French fries</p>
+  				<img src="images/lorempixel.city.1.jpeg" class="img-thumbnail">
+  				<p>Pasta</p>
+          <button class="btn btn-info btn-xs">UNCLAIM</button>
   			</a>
   		</div>
 
   <!-- include JavaScript near the end of the HTML file -->
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script src="js/introHCI.js"></script>
+
+	<!-- Add icon library -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
 </body>
 </html>

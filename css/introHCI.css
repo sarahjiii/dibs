@@ -14,6 +14,7 @@
 body {
      border: 1px dotted gray;
      padding: 20px;
+		 background-color:#EAD1DCFF;
 }
 
 .jumbotron {
@@ -23,7 +24,7 @@ body {
 
 .jumbotron:after {
      content:"";
-     background: url("../images/lorempixel.jumbotron.jpeg");
+     background: url("../images/lorenpixel.jumbotron.jpeg");
      opacity: 0.2;
      top: 0;
      left: 0;
@@ -41,27 +42,16 @@ body {
      text-align: center;
 }
 
+.small-img {
+  border-width: 100000px;
+}
+
 header{
 	width:100%;
-	background:#ffffff;
-	height:30px;
-	line-height:60px;
+	background-color:#EAD1DCFF;
+	height:50px;
+	line-height:20px;
 	border-bottom:1px solid #dddddd;
-}
-.hamburger{
-  background:none;
-  position:absolute;
-  top:0;
-  left:0;
-  line-height:45px;
-  padding:5px 15px 0px 15px;
-  color:#999;
-  border:0;
-  font-size:1.4em;
-  font-weight:bold;
-  cursor:pointer;
-  outline:none;
-  z-index:10000000000000;
 }
 
 nav{z-index:1000000; font-weight:bold; font-size:0.8em; width:100%; background:#f1f1f1;  position:absolute; text-align:center; font-size:12px;}
@@ -73,12 +63,49 @@ nav ul li a:hover {  color: #666; text-decoration:none;}
 nav a{text-decoration:none; color:#666;}
 nav a:hover{text-decoration:none; color:#666;}
 
+.hamburger{
+	background-color: #ffffff00; /* Transparent background */
+	border: none; /* Remove borders */
+	color: black; /* Black */
+	padding: 0px 30px 0px 0px; /* Some padding */
+	font-size: 2.5em; /* Set a font size */
+	cursor: pointer; /* Mouse pointer on hover */
+}
+
+.homeButton {
+	background-color: #ffffff00; /* Transparent background */
+	border: none; /* Remove borders */
+	color: black; /* Black */
+	padding: 0px 30px 0px 0px; /* Some padding */
+	font-size: 2.5em; /* Set a font size */
+	cursor: pointer; /* Mouse pointer on hover */
+}
+
+.title {
+	background-color: #ffffff00; /* Transparent background */
+	border: none; /* Remove borders */
+	color: black; /* Black */
+	padding: 0px 0px 0px 0px; /* Some padding */
+	font-size: 2.5em; /* Set a font size */
+	cursor: pointer; /* Mouse pointer on hover */
+}
+
+.postButton {
+	background-color: #ffffff00; /* Transparent background */
+	border: none; /* Remove borders */
+	color: black; /* Black */
+	padding: 0px 0px 0px 0px; /* Some padding */
+	font-size: 2.5em; /* Set a font size */
+	cursor: pointer; /* Mouse pointer on hover */
+	float:right;
+}
+
 .glyphicon-home{
   color:white;
   font-size:1.5em;
   margin-top:5px;
   margin:0 auto;
 }
-header{display:inline-block; font-size:12px;}
-span{padding-left:20px;}
+header{display:inline-block; font-size:14px;}
+span{padding-left:20px}
 a{color:#336699;}
