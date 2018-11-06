@@ -36,12 +36,12 @@
 		<!-- p means paragraph -->
 		<div class="jumbotron">
 			<h1>Put something up for dibs:</h1>
-      <p><textarea placeholder="What are you putting up for dibs?"></textarea>
+      <p><textarea id="foodItem" placeholder="What are you putting up for dibs?"></textarea>
         <img id="btnFileUpload" src="images/camera.png" width="65px" height="65px" style="border:3px solid black; margin: 0px 20px"/>
         <span id="spnFilePath"></span>
         <input type="file" id="FileUpload1" accept="image/*" style="display:none"/></p>
-      <p><textarea placeholder="Location of pick up"></textarea></p>
-      <b>Pick up by: <input type="time" name="usr_time" value="13:30"></b>
+      <p><textarea id="location" placeholder="Location of pick up"></textarea></p>
+      <b>Pick up by: <input id="time" type="time" name="usr_time" value="13:30"></b>
 			<div class="contains">
 				<b>Contains:</b>
         <p></p>
@@ -53,7 +53,8 @@
 				<input type="checkbox" name="contains" value="gluten"> Gluten<br>
 			</div>
       <p></p>
-			<p><a href="index.html"><button id="testjs" class="btn btn-primary btn-lg">Post</button></a></p>
+			<p><a ><button id="testjs" class="btn btn-primary btn-lg"
+      onclick="postClick()">Post</button></a></p>
 		</div>
 
   <!-- include JavaScript near the end of the HTML file -->
