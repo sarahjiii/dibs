@@ -37,14 +37,18 @@ function getBase64Image(img) {
 function saveUser(){
   var user = document.getElementById("user").value;
   var pass = document.getElementById("pass").value;
-  if (user == "") {
-    alert("Please enter your username.");
-  }
-  else if (pass=="") {
-    alert ("Please enter your password");
-  }
   localStorage.setItem("curUser", user);
   localStorage.setItem("curPassword", pass);
+  if (user == "") {
+    alert("Please enter your username.");
+    localStorage.removeItem("curUser");
+    localStorage.removeItem("curPassword");
+  }
+  else if (pass=="") {
+    alert ("Please enter your password.");
+    localStorage.removeItem("curUser");
+    localStorage.removeItem("curPassword");
+  }
 }
 
 function deleteUser(){
@@ -181,8 +185,8 @@ function claimClick(clicked_id) {
 
   var postObject = JSON.parse(localStorage.getItem(postName));
   var time = postObject.time;
-  alert("You just claimed " + postObject.user + "'s " + postObject.foodItem + 
-  "\nPlease pick it up by " + time + " at " + postObject.loc);  
+  alert("You just claimed " + postObject.user + "'s " + postObject.foodItem +
+  "\nPlease pick it up by " + time + " at " + postObject.loc);
   postObject.claimedUser = localStorage.getItem("curUser");
   localStorage.setItem(claimName, JSON.stringify(postObject)); //add claim
   localStorage.removeItem(postName); //remove post
@@ -230,8 +234,8 @@ function unclaimClick(clicked_id) {
   $("#" + claimName).fadeOut(); //have claim disappear
   $("#" + claimName).remove();
   var claimObject = JSON.parse(localStorage.getItem(claimName));
-  alert("You just UNclaimed " + claimObject.user + "'s " + claimObject.foodItem + 
-  "\n" + claimObject.user + " has been notified");  
+  alert("You just UNclaimed " + claimObject.user + "'s " + claimObject.foodItem +
+  "\n" + claimObject.user + " has been notified");
   localStorage.setItem(postName, JSON.stringify(claimObject)); //add claim
   localStorage.removeItem(claimName); //remove post
 }
