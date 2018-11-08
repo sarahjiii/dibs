@@ -136,7 +136,7 @@ function displayPosts(){
     console.log(curObject);
     if (curObject != null) {
       var curHtml = template(curObject);
-      parentDiv.append(curHtml);
+      parentDiv.prepend(curHtml);
     }
   }
 }
@@ -169,7 +169,7 @@ function displayClaimedPosts() {
     console.log(curObject);
     if (curObject != null && curObject.claimedUser == curUser) {
       var curHtml = template(curObject);
-      parentDiv.append(curHtml);
+      parentDiv.prepend(curHtml);
     }
   }
 }
@@ -221,7 +221,7 @@ function displayMyPosts() {
     if(curObject != null && curObject.user == curUser){
       console.log(curObject);
       var curHtml = template(curObject);
-      parentDiv.append(curHtml);
+      parentDiv.prepend(curHtml);
 
     }
   }
