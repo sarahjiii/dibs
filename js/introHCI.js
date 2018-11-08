@@ -191,4 +191,15 @@ function displayMyPosts() {
 
     }
   }
+
+function unclaimClick(clicked_id) {
+  var postName = "post" + clicked_id;
+  var claimName = "claim" + clicked_id;
+
+  $("#" + claimName).fadeOut(); //have claim disappear
+  $("#" + claimName).remove();
+
+  var claimObject = JSON.parse(localStorage.getItem(claimName));
+  localStorage.setItem(postName, JSON.stringify(claimObject)); //add claim
+  localStorage.removeItem(claimName); //remove post
 }
