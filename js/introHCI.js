@@ -71,13 +71,20 @@ function postClick() {
     'contains': containsStr,
     'user': curUser};
     //'img': imgData};
-
   var postIndex = 0;
+
   if(localStorage.getItem("postIndex") != null){
     postIndex = parseInt(localStorage.getItem("postIndex"));
   }
 
   var postName = "post" + postIndex;
+  var postObject = {
+                  'index': postIndex,
+                  'foodItem': foodItem,
+                  'loc': loc,
+                  'time': time,
+                  'contains': containsStr};
+
   localStorage.setItem(postName, JSON.stringify(postObject));
   postIndex = postIndex + 1;
   localStorage.removeItem("postIndex");
@@ -108,8 +115,53 @@ function displayPosts(){
     var curObject = JSON.parse(localStorage.getItem(postId));
     console.log("curObject");
     console.log(curObject);
-    var curHtml = template(curObject);
-    parentDiv.append(curHtml);
-
+    if (curObject != null) {
+      var curHtml = template(curObject);
+      parentDiv.append(curHtml);
+    }
   }
+}
+
+function displayClaimedPosts() {
+  console.log("claimed posts");
+  var source = $("#claims-template").html();
+  console.log("here she is");
+  console.log(source);
+  var template = Handlebars.compile(source);
+  var parentDiv = $("#templatedClaims");
+  //get the number of posts made so far
+  var postIndex;
+
+  if(localStorage.getItem("postIndex") == null){
+    postIndex = 0;
+  }
+  else{
+    postIndex = localStorage.getItem("postIndex");
+  }
+
+  console.log("postIndex: ", postIndex);
+  //clear the parentDiv to make sure we're not appending over and over again
+  //parentDiv.html("");
+  for(var i = 0; i < postIndex; i++){
+    var claimId = "claim" + i;
+    var curObject = JSON.parse(localStorage.getItem(claimId));
+    console.log("curObject");
+    console.log(curObject);
+    if (curObject != null) {
+      var curHtml = template(curObject);
+      parentDiv.append(curHtml);
+    }
+  }
+}
+
+function claimClick(clicked_id) {
+  var postName = "post" + clicked_id;
+  var claimName = "claim" + clicked_id;
+
+  $("#" + postName).fadeOut(); //have post disappear
+  $("#" + postName).remove();
+
+  var postObject = JSON.parse(localStorage.getItem(postName));
+  localStorage.setItem(claimName, JSON.stringify(postObject)); //add claim
+  localStorage.removeItem(postName); //remove post
 }
