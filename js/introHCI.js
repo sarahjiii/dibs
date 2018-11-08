@@ -65,12 +65,15 @@ function postClick() {
   //localStorage.setItem("imgData", imgData);
 
   var curUser = localStorage.getItem("curUser");
-  var postObject = {'foodItem': foodItem,
+  var postObject = {
+    'index': postIndex,
+    'foodItem': foodItem,
     'loc': loc,
     'time': time,
     'contains': containsStr,
     'user': curUser};
     //'img': imgData};
+  console.log(postObject);
   var postIndex = 0;
 
   if(localStorage.getItem("postIndex") != null){
@@ -78,12 +81,6 @@ function postClick() {
   }
 
   var postName = "post" + postIndex;
-  var postObject = {
-                  'index': postIndex,
-                  'foodItem': foodItem,
-                  'loc': loc,
-                  'time': time,
-                  'contains': containsStr};
 
   localStorage.setItem(postName, JSON.stringify(postObject));
   postIndex = postIndex + 1;
@@ -164,4 +161,34 @@ function claimClick(clicked_id) {
   var postObject = JSON.parse(localStorage.getItem(postName));
   localStorage.setItem(claimName, JSON.stringify(postObject)); //add claim
   localStorage.removeItem(postName); //remove post
+}
+
+function displayMyPosts() {
+  var source = $("#my-posts-template").html();
+  var template = Handlebars.compile(source);
+  var curUser = localStorage.getItem("curUser");
+  var parentDiv = $("#templatedMine");
+  //get the number of posts made so far
+  var postIndex;
+
+  if(localStorage.getItem("postIndex") == null){
+    postIndex = 0;
+  }
+  else{
+    postIndex = localStorage.getItem("postIndex");
+  }
+
+  //clear the parentDiv to make sure we're not appending over and over again
+  //parentDiv.html("");
+  for(var i = 0; i < postIndex; i++){
+    var postId = "post" + i;
+    var curObject = JSON.parse(localStorage.getItem(postId));
+    console.log("curObject user: " + curObject.user);
+    if(curObject != null && curObject.user == curUser){
+      console.log(curObject);
+      var curHtml = template(curObject);
+      parentDiv.append(curHtml);
+
+    }
+  }
 }
