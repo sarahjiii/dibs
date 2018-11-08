@@ -122,25 +122,3 @@ function claimClick(clicked_id) {
   localStorage.setItem(claimName, JSON.stringify(postObject)); //add claim
   localStorage.removeItem(postName); //remove post
 }
-/*$(function () {
-  $("#camfile").click(function () {
-    $("#uploadfile").click();
-  });
-  $("#uploadfile").change(function() {
-    var fileName = $(this).val().split('\\')[$(this).val().split('\\').length - 1];
-    filePath.html("<b>Selected File: </b>" + fileName);
-  });
-});*/
-
-$(function () {
-    var fileupload = $("#FileUpload1");
-    var filePath = $("#spnFilePath");
-    var button = $("#btnFileUpload");
-    button.click(function () {
-        fileupload.click();
-    });
-    fileupload.change(function () {
-        var fileName = $(this).val().split('\\')[$(this).val().split('\\').length - 1];
-        filePath.html("<b>Selected File: </b>" + fileName);
-    });
-});

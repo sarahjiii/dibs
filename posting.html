@@ -39,7 +39,23 @@
       <p><textarea id="foodItem" placeholder="What are you putting up for dibs?"></textarea>
         <img id="btnFileUpload" src="images/camera.png" width="65px" height="65px" style="border:3px solid black; margin: 0px 20px"/>
         <span id="spnFilePath"></span>
-        <input type="file" id="FileUpload1" accept="image/*" style="display:none"/></p>
+        <input type="file" id="FileUpload1" accept="image/*" style="display:none"/>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script type="text/javascript">
+        $(function () {
+          var fileupload = $("#FileUpload1");
+          var filePath = $("#spnFilePath");
+          var button = $("#btnFileUpload");
+          button.click(function () {
+              fileupload.click();
+            });
+            fileupload.change(function () {
+              var fileName = $(this).val().split('\\')[$(this).val().split('\\').length - 1];
+              filePath.html("<b>Selected File: </b>" + fileName);
+            });
+          });
+        </script>
+      </p>
       <p><textarea id="location" placeholder="Location of pick up"></textarea></p>
       <b>Pick up by: <input id="time" type="time" name="usr_time" value="13:30"></b>
 			<div class="contains">
