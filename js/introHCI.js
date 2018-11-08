@@ -10,6 +10,10 @@ $(document).ready(function() {
  * Function that is called when the document is ready.
  */
 function initializePage() {
+  console.log(location.href);
+  if (location.href == "index.html") {
+    location.replace("login.html");
+  }
 	$( "nav" ).hide();
 	$( ".hamburger" ).click(function() {
 		$( "nav" ).slideToggle( "slow", function() {});
