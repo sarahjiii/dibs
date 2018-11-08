@@ -38,18 +38,28 @@
 		<div class="jumbotron">
 			<h1>My Claims</h1>
 
+			<script id="claims-template" type="text/x-handlebars-template">
+				<div class="post" id=post{{index}}>
+					<a class="thumbnail">
+						<p style="font-size:20px"><b>{{username}}</b></p>
+						<p>{{loc}}</p>
+						<img src="images/pizza.jpg" class="img-thumbnail">
+							<p><b>{{foodItem}}</b></p>
+							<p>Contains: {{contains}}</p>
+							<p>Claim by: {{time}}</p>
+							<button class="btn btn-info btn" id="unclaim{{index}}" onclick="unclaimClick(this.id)">UNCLAIM</button>
+						</a>
+			</div>
+		</script>
 
-  		<div class="post" id="post2">
-  			<a href="#" class="thumbnail">
-  				<img src="images/lorempixel.city.1.jpeg" class="img-thumbnail">
-  				<p>Pasta</p>
-          <button class="btn btn-info btn-xs">UNCLAIM</button>
-  			</a>
-  		</div>
+			<div id="templatedClaims">
+			  <!-- we will inject templated claims HTML code into here -->
+			</div>
 
   <!-- include JavaScript near the end of the HTML file -->
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script src="js/handlebars-v4.0.11.js"></script>
 	<script src="js/introHCI.js"></script>
 
 	<!-- Add icon library -->

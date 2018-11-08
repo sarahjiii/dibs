@@ -100,6 +100,10 @@ function claimClick(clicked_id) {
   });
 });*/
 
+function unclaimClick(clicked_id) {
+  /* what's going on here */
+}
+
 $(function () {
     var fileupload = $("#FileUpload1");
     var filePath = $("#spnFilePath");
