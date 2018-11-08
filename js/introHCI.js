@@ -35,7 +35,15 @@ function getBase64Image(img) {
 
 function saveUser(){
   var user = document.getElementById("user").value;
+  var pass = document.getElementById("pass").value;
+  if (user == "") {
+    alert("Please enter your username.");
+  }
+  else if (pass=="") {
+    alert ("Please enter your password");
+  }
   localStorage.setItem("curUser", user);
+  localStorage.setItem("curPassword", pass);
 }
 
 function deleteUser(){
