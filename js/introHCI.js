@@ -38,6 +38,10 @@ function saveUser(){
   localStorage.setItem("curUser", user);
 }
 
+function deleteUser(){
+  localStorage.removeItem("curUser");
+}
+
 function saveFoodPref() {
   var prefs = document.getElementsByName("pref");
   var prefString = "";

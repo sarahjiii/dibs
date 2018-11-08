@@ -16,7 +16,7 @@
     <a href="myclaims.html"><li>My Claims</li></a>
     <a href="friends.html"><li>Friends</li></a>
     <a href="foodpref.html"><li>Food Preferences</li></a>
-    <a href="login.html"><li>Logout</li></a>
+    <a href="login.html" onclick="deleteUser()"><li>Logout</li></a>
   </ul>
 </nav>
 
@@ -40,18 +40,17 @@
         <script id="my-posts-template" type="text/x-handlebars-template">
 				<div class="post" >
 					<a class="thumbnail">
-						<p style="font-size:20px"><b>username</b></p>
-						<p>{{loc}}</p>
+						<p>Location: {{loc}}</p>
 						<img src="images/pizza.jpg" class="img-thumbnail">
 							<p><b>{{foodItem}}</b></p>
 							<p>Contains: {{contains}}</p>
 							<p>Claim by: {{time}}</p>
 							<button class="btn btn-info btn" id="unclaim{{index}}">EDIT</button>
-							<button class="btn btn-info btn" id="unclaim{{index}}">DELETE HER</button>
+							<button class="btn btn-danger btn" id="unclaim{{index}}">DELETE</button>
 					</a>
 				</div>
 			</script>
-      </div> 
+      </div>
 			<div id="templatedMine">
 			  <!-- we will inject templated claims HTML code into here -->
 			</div>
