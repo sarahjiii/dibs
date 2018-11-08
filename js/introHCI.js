@@ -167,7 +167,11 @@ function claimClick(clicked_id) {
   $("#" + postName).fadeOut(); //have post disappear
   $("#" + postName).remove();
   console.log(claimName);
+
   var postObject = JSON.parse(localStorage.getItem(postName));
+  var time = postObject.time;
+  alert("You just claimed " + postObject.user + "'s " + postObject.foodItem + 
+  "\nPlease pick it up by " + time + " at " + postObject.loc);  
   localStorage.setItem(claimName, JSON.stringify(postObject)); //add claim
   localStorage.removeItem(postName); //remove post
 }
@@ -208,8 +212,9 @@ function unclaimClick(clicked_id) {
 
   $("#" + claimName).fadeOut(); //have claim disappear
   $("#" + claimName).remove();
-
   var claimObject = JSON.parse(localStorage.getItem(claimName));
+  alert("You just UNclaimed " + claimObject.user + "'s " + claimObject.foodItem + 
+  "\n" + claimObject.user + " has been notified");  
   localStorage.setItem(postName, JSON.stringify(claimObject)); //add claim
   localStorage.removeItem(claimName); //remove post
 }
