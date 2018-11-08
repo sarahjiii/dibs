@@ -28,16 +28,19 @@ function postClick() {
     }
   }
 
-  var postObject = {'foodItem': foodItem,
-                  'loc': loc,
-                  'time': time,
-                   'contains': containsStr};
   var postIndex = 0;
 
   if(localStorage.getItem("postIndex") != null){
     postIndex = parseInt(localStorage.getItem("postIndex"));
   }
   var postName = "post" + postIndex;
+  var postObject = {
+                  'index': postIndex,
+                  'foodItem': foodItem,
+                  'loc': loc,
+                  'time': time,
+                  'contains': containsStr};
+
   localStorage.setItem(postName, JSON.stringify(postObject));
   postIndex = postIndex + 1;
   localStorage.removeItem("postIndex");
@@ -60,7 +63,7 @@ function displayPosts(){
   else{
     postIndex = localStorage.getItem("postIndex");
   }
-  
+
   console.log("postIndex: ", postIndex);
   //clear the parentDiv to make sure we're not appending over and over again
   parentDiv.html("");
@@ -73,6 +76,19 @@ function displayPosts(){
     parentDiv.append(curHtml);
 
   }
+}
+
+function claimClick(clicked_id) {
+  //var clickedPost = document.getElementById("post" + clicked_id);
+  //clickedPost.removeItem();
+  var postName = "post" + clicked_id;
+  $("#" + postName).fadeOut();
+  $("#" + postName).remove();
+
+  var post = localStorage.getItem(postName);
+  
+
+  localStorage.removeItem(postName);
 }
 /*$(function () {
   $("#camfile").click(function () {
