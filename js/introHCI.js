@@ -22,6 +22,7 @@ function initializePage() {
 }
 
 // TRYING TO DISPLAY UPLOADED IMAGE
+// right now drawImage doesn't work with with the img
 /*function getBase64Image(img) {
   var canvas = document.createElement("canvas");
   canvas.width = img.width;
@@ -109,6 +110,7 @@ function postClick() {
 function displayPosts(){
 
   // TRYING TO DISPLAY UPLOADED IMAGE
+  // more base64 stuff that doesn't work for some reason
   /*var dataImage = localStorage.getItem('imgData');
   var bannerImg = document.getElementById('testImage');
   bannerImg.src = "data:image/png;base64," + dataImage;
@@ -257,6 +259,7 @@ function readURL() {
     fileupload.click();
     fileupload.change(function () {
       var file = document.getElementById('FileUpload1').files[0];
+      // some stuff that doesn't work
       //imgData = getBase64Image(file);
       //localStorage.setItem("imgData", imgData);
       console.log(file);
@@ -264,19 +267,18 @@ function readURL() {
         // create reader
         var reader = new FileReader();
         reader.onload = function(e) {
-          // browser completed reading file - display it
+          // storing e.target.result, whatever that is
           localStorage.setItem("image",e.target.result);
-
+          // browser completed reading file - display it
           $('#testImage')
               .attr('src', e.target.result)
               .width(75)
               .height(100);
           $('#testImage').show();
         };
-
         reader.readAsDataURL(file);
       }
-
+      // this displays the file name
       var fileName = $(this).val().split('\\')[$(this).val().split('\\').length - 1];
       filePath.html("<b>Selected File: </b>" + fileName);
     });
