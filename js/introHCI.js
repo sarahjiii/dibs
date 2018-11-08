@@ -11,6 +11,9 @@ $(document).ready(function() {
  * Function that is called when the document is ready.
  */
 function initializePage() {
+  if (location.href.includes("index.html") && !localStorage.getItem("curUser")) {
+    location.replace("login.html");
+  }
 	$( "nav" ).hide();
 	$( ".hamburger" ).click(function() {
 		$( "nav" ).slideToggle( "slow", function() {});
@@ -33,6 +36,10 @@ function getBase64Image(img) {
 function saveUser(){
   var user = document.getElementById("user").value;
   localStorage.setItem("curUser", user);
+}
+
+function deleteUser(){
+  localStorage.removeItem("curUser");
 }
 
 function saveFoodPref() {

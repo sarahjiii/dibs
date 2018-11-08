@@ -18,7 +18,7 @@
     <a href="myclaims.html"><li>My Claims</li></a>
     <a href="friends.html"><li>Friends</li></a>
     <a href="foodpref.html"><li>Food Preferences</li></a>
-    <a href="login.html"><li>Logout</li></a>
+    <a href="login.html" onclick="deleteUser()"><li>Logout</li></a>
   </ul>
 </nav>
 
@@ -48,8 +48,8 @@
   <script id="entry-template" type="text/x-handlebars-template">
     <div class="post" id="post{{index}}">
       <a class="thumbnail">
-        <p style="font-size:20px"><b>"username"</b></p>
-        <p>{{loc}}</p>
+        <p style="font-size:20px"><b>{{user}}</b></p>
+        <p>Location: {{loc}}</p>
         <img src="images/pizza.jpg" class="img-thumbnail">
           <p><b>{{foodItem}}</b></p>
           <p>Contains: {{contains}}</p>
