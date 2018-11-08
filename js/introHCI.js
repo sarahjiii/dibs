@@ -30,6 +30,10 @@ function getBase64Image(img) {
   return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
 }
 
+function saveUser(){
+  var user = document.getElementById("user").value;
+  localStorage.setItem("curUser", user);
+}
 
 function saveFoodPref() {
   var prefs = document.getElementsByName("pref");
@@ -55,14 +59,17 @@ function postClick() {
       containsStr = containsStr + contains[i].defaultValue + " ";
     }
   }
-  //bannerImage = document.getElementById('entry-template');
+  //bannerImage = document.getElementById('FileUpload1');
+  //bannerImage = thing
   //imgData = getBase64Image(bannerImage);
   //localStorage.setItem("imgData", imgData);
-  
+
+  var curUser = localStorage.getItem("curUser");
   var postObject = {'foodItem': foodItem,
     'loc': loc,
     'time': time,
-    'contains': containsStr};
+    'contains': containsStr,
+    'user': curUser};
     //'img': imgData};
 
   var postIndex = 0;
@@ -75,7 +82,6 @@ function postClick() {
   postIndex = postIndex + 1;
   localStorage.removeItem("postIndex");
   localStorage.setItem("postIndex", postIndex);
-  console.log(postObject);
 }
 
 function displayPosts(){
