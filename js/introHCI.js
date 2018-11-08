@@ -21,7 +21,8 @@ function initializePage() {
     });
 }
 
-function getBase64Image(img) {
+// TRYING TO DISPLAY UPLOADED IMAGE
+/*function getBase64Image(img) {
   var canvas = document.createElement("canvas");
   canvas.width = img.width;
   canvas.height = img.height;
@@ -32,7 +33,7 @@ function getBase64Image(img) {
   var dataURL = canvas.toDataURL("image/png");
 
   return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
-}
+}*/
 
 function saveUser(){
   var user = document.getElementById("user").value;
@@ -79,14 +80,9 @@ function postClick() {
       containsStr = containsStr + contains[i].defaultValue + " ";
     }
   }
-  //bannerImage = document.getElementById('FileUpload1');
-  //bannerImage = thing
-  //imgData = getBase64Image(bannerImage);
-  //localStorage.setItem("imgData", imgData);
 
   var curUser = localStorage.getItem("curUser");
 
-    //'img': imgData};
   console.log(postObject);
   var postIndex = 0;
 
@@ -111,6 +107,13 @@ function postClick() {
 }
 
 function displayPosts(){
+
+  // TRYING TO DISPLAY UPLOADED IMAGE
+  /*var dataImage = localStorage.getItem('imgData');
+  var bannerImg = document.getElementById('testImage');
+  bannerImg.src = "data:image/png;base64," + dataImage;
+  bannerImg.style.display = "inline";*/
+
   var source = $("#entry-template").html();
   console.log("here she is");
   console.log(source);
@@ -246,3 +249,35 @@ function addFriend() {
     alert("You have added " + friend + " as a friend!");
     document.getElementById("addedFriend").value = '';
 }
+
+function readURL() {
+  var fileupload = $("#FileUpload1");
+  var filePath = $("#spnFilePath");
+  var button = $("#btnFileUpload");
+    fileupload.click();
+    fileupload.change(function () {
+      var file = document.getElementById('FileUpload1').files[0];
+      //imgData = getBase64Image(file);
+      //localStorage.setItem("imgData", imgData);
+      console.log(file);
+      if (file) {
+        // create reader
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          // browser completed reading file - display it
+          localStorage.setItem("image",e.target.result);
+
+          $('#testImage')
+              .attr('src', e.target.result)
+              .width(75)
+              .height(100);
+          $('#testImage').show();
+        };
+
+        reader.readAsDataURL(file);
+      }
+
+      var fileName = $(this).val().split('\\')[$(this).val().split('\\').length - 1];
+      filePath.html("<b>Selected File: </b>" + fileName);
+    });
+  }
