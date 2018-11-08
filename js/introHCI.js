@@ -72,23 +72,55 @@ function displayPosts(){
     var curObject = JSON.parse(localStorage.getItem(postId));
     console.log("curObject");
     console.log(curObject);
-    var curHtml = template(curObject);
-    parentDiv.append(curHtml);
+    if (curObject != null) {
+      var curHtml = template(curObject);
+      parentDiv.append(curHtml);
+    }
+  }
+}
 
+function displayClaimedPosts() {
+  console.log("claimed posts");
+  var source = $("#claims-template").html();
+  console.log("here she is");
+  console.log(source);
+  var template = Handlebars.compile(source);
+  var parentDiv = $("#templatedClaims");
+  //get the number of posts made so far
+  var postIndex;
+
+  if(localStorage.getItem("postIndex") == null){
+    postIndex = 0;
+  }
+  else{
+    postIndex = localStorage.getItem("postIndex");
+  }
+
+  console.log("postIndex: ", postIndex);
+  //clear the parentDiv to make sure we're not appending over and over again
+  //parentDiv.html("");
+  for(var i = 0; i < postIndex; i++){
+    var claimId = "claim" + i;
+    var curObject = JSON.parse(localStorage.getItem(claimId));
+    console.log("curObject");
+    console.log(curObject);
+    if (curObject != null) {
+      var curHtml = template(curObject);
+      parentDiv.append(curHtml);
+    }
   }
 }
 
 function claimClick(clicked_id) {
-  //var clickedPost = document.getElementById("post" + clicked_id);
-  //clickedPost.removeItem();
   var postName = "post" + clicked_id;
-  $("#" + postName).fadeOut();
+  var claimName = "claim" + clicked_id;
+
+  $("#" + postName).fadeOut(); //have post disappear
   $("#" + postName).remove();
 
-  var post = localStorage.getItem(postName);
-  
-
-  localStorage.removeItem(postName);
+  var postObject = JSON.parse(localStorage.getItem(postName));
+  localStorage.setItem(claimName, JSON.stringify(postObject)); //add claim
+  localStorage.removeItem(postName); //remove post
 }
 /*$(function () {
   $("#camfile").click(function () {
@@ -99,10 +131,6 @@ function claimClick(clicked_id) {
     filePath.html("<b>Selected File: </b>" + fileName);
   });
 });*/
-
-function unclaimClick(clicked_id) {
-  /* what's going on here */
-}
 
 $(function () {
     var fileupload = $("#FileUpload1");
