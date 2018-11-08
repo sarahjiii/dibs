@@ -60,7 +60,7 @@ function displayPosts(){
   else{
     postIndex = localStorage.getItem("postIndex");
   }
-  
+
   console.log("postIndex: ", postIndex);
   //clear the parentDiv to make sure we're not appending over and over again
   parentDiv.html("");
@@ -83,6 +83,10 @@ function displayPosts(){
     filePath.html("<b>Selected File: </b>" + fileName);
   });
 });*/
+
+function unclaimClick(clicked_id) {
+  /* what's going on here */
+}
 
 $(function () {
     var fileupload = $("#FileUpload1");
