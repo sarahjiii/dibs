@@ -6,6 +6,7 @@ $(document).ready(function() {
   displayPosts();
 })
 
+
 /*
  * Function that is called when the document is ready.
  */
@@ -13,7 +14,34 @@ function initializePage() {
 	$( "nav" ).hide();
 	$( ".hamburger" ).click(function() {
 		$( "nav" ).slideToggle( "slow", function() {});
-	});
+    });
+}
+
+function getBase64Image(img) {
+  var canvas = document.createElement("canvas");
+  canvas.width = img.width;
+  canvas.height = img.height;
+
+  var ctx = canvas.getContext("2d");
+  ctx.drawImage(img, 0, 0);
+
+  var dataURL = canvas.toDataURL("image/png");
+
+  return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+}
+
+
+function saveFoodPref() {
+  var prefs = document.getElementsByName("pref");
+  var prefString = "";
+  for(var i = 0; i < prefs.length; i++){
+    if (prefs[i].checked) {
+      prefString = prefString + prefs[i].defaultValue + " and ";
+    }
+  }
+  var editedPref = prefString.substring(0,prefString.length - 5);
+  localStorage.setItem("preferences", editedPref);
+  alert("Your food preferences of " + editedPref + " were saved");
 }
 
 function postClick() {
@@ -27,16 +55,21 @@ function postClick() {
       containsStr = containsStr + contains[i].defaultValue + " ";
     }
   }
-
+  //bannerImage = document.getElementById('entry-template');
+  //imgData = getBase64Image(bannerImage);
+  //localStorage.setItem("imgData", imgData);
+  
   var postObject = {'foodItem': foodItem,
-                  'loc': loc,
-                  'time': time,
-                   'contains': containsStr};
-  var postIndex = 0;
+    'loc': loc,
+    'time': time,
+    'contains': containsStr};
+    //'img': imgData};
 
+  var postIndex = 0;
   if(localStorage.getItem("postIndex") != null){
     postIndex = parseInt(localStorage.getItem("postIndex"));
   }
+
   var postName = "post" + postIndex;
   localStorage.setItem(postName, JSON.stringify(postObject));
   postIndex = postIndex + 1;
