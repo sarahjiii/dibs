@@ -11,7 +11,8 @@ $(document).ready(function() {
  * Function that is called when the document is ready.
  */
 function initializePage() {
-  if (location.href.includes("index.html") && !localStorage.getItem("curUser")) {
+  if (location.href.includes("index.html") && !localStorage.getItem("curUser")
+      && !localStorage.getItem("curPassword")) {
     location.replace("login.html");
   }
 	$( "nav" ).hide();
@@ -35,7 +36,15 @@ function getBase64Image(img) {
 
 function saveUser(){
   var user = document.getElementById("user").value;
+  var pass = document.getElementById("pass").value;
+  if (user == "") {
+    alert("Please enter your username.");
+  }
+  else if (pass=="") {
+    alert ("Please enter your password");
+  }
   localStorage.setItem("curUser", user);
+  localStorage.setItem("curPassword", pass);
 }
 
 function deleteUser(){
@@ -87,7 +96,8 @@ function postClick() {
     'loc': loc,
     'time': time,
     'contains': containsStr,
-    'user': curUser};
+    'user': curUser,
+    'claimedUser': ''}; //nobody has claimed it
   var postName = "post" + postIndex;
 
   localStorage.setItem(postName, JSON.stringify(postObject));
@@ -133,6 +143,7 @@ function displayClaimedPosts() {
   console.log("here she is");
   console.log(source);
   var template = Handlebars.compile(source);
+  var curUser = localStorage.getItem("curUser");
   var parentDiv = $("#templatedClaims");
   //get the number of posts made so far
   var postIndex;
@@ -152,7 +163,7 @@ function displayClaimedPosts() {
     var curObject = JSON.parse(localStorage.getItem(claimId));
     console.log("curObject");
     console.log(curObject);
-    if (curObject != null) {
+    if (curObject != null && curObject.claimedUser == curUser) {
       var curHtml = template(curObject);
       parentDiv.append(curHtml);
     }
@@ -172,6 +183,7 @@ function claimClick(clicked_id) {
   var time = postObject.time;
   alert("You just claimed " + postObject.user + "'s " + postObject.foodItem + 
   "\nPlease pick it up by " + time + " at " + postObject.loc);  
+  postObject.claimedUser = localStorage.getItem("curUser");
   localStorage.setItem(claimName, JSON.stringify(postObject)); //add claim
   localStorage.removeItem(postName); //remove post
 }
@@ -195,7 +207,12 @@ function displayMyPosts() {
   //parentDiv.html("");
   for(var i = 0; i < postIndex; i++){
     var postId = "post" + i;
+    var claimId = "claim" + i;
     var curObject = JSON.parse(localStorage.getItem(postId));
+    var claimObject = JSON.parse(localStorage.getItem(claimId));
+    if (curObject == null) {
+      curObject = claimObject;
+    }
     console.log("curObject user: " + curObject.user);
     if(curObject != null && curObject.user == curUser){
       console.log(curObject);
