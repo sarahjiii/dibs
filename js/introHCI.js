@@ -65,13 +65,7 @@ function postClick() {
   //localStorage.setItem("imgData", imgData);
 
   var curUser = localStorage.getItem("curUser");
-  var postObject = {
-    'index': postIndex,
-    'foodItem': foodItem,
-    'loc': loc,
-    'time': time,
-    'contains': containsStr,
-    'user': curUser};
+
     //'img': imgData};
   console.log(postObject);
   var postIndex = 0;
@@ -80,6 +74,13 @@ function postClick() {
     postIndex = parseInt(localStorage.getItem("postIndex"));
   }
 
+  var postObject = {
+    'index': postIndex,
+    'foodItem': foodItem,
+    'loc': loc,
+    'time': time,
+    'contains': containsStr,
+    'user': curUser};
   var postName = "post" + postIndex;
 
   localStorage.setItem(postName, JSON.stringify(postObject));
@@ -152,12 +153,13 @@ function displayClaimedPosts() {
 }
 
 function claimClick(clicked_id) {
+  console.log("clicked_id: " + clicked_id);
   var postName = "post" + clicked_id;
   var claimName = "claim" + clicked_id;
 
   $("#" + postName).fadeOut(); //have post disappear
   $("#" + postName).remove();
-
+  console.log(claimName);
   var postObject = JSON.parse(localStorage.getItem(postName));
   localStorage.setItem(claimName, JSON.stringify(postObject)); //add claim
   localStorage.removeItem(postName); //remove post
@@ -191,6 +193,7 @@ function displayMyPosts() {
 
     }
   }
+}
 
 function unclaimClick(clicked_id) {
   var postName = "post" + clicked_id;
