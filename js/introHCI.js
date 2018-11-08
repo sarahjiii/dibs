@@ -239,3 +239,10 @@ function unclaimClick(clicked_id) {
   localStorage.setItem(postName, JSON.stringify(claimObject)); //add claim
   localStorage.removeItem(claimName); //remove post
 }
+
+function addFriend() {
+    var friend = document.getElementById("addedFriend").value;
+    console.log(friend);
+    alert("You have added " + friend + " as a friend!");
+    document.getElementById("addedFriend").value = '';
+}
