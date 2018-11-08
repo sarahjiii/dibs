@@ -93,7 +93,7 @@ function displayPosts(){
   else{
     postIndex = localStorage.getItem("postIndex");
   }
-  
+
   console.log("postIndex: ", postIndex);
   //clear the parentDiv to make sure we're not appending over and over again
   parentDiv.html("");
@@ -107,25 +107,3 @@ function displayPosts(){
 
   }
 }
-/*$(function () {
-  $("#camfile").click(function () {
-    $("#uploadfile").click();
-  });
-  $("#uploadfile").change(function() {
-    var fileName = $(this).val().split('\\')[$(this).val().split('\\').length - 1];
-    filePath.html("<b>Selected File: </b>" + fileName);
-  });
-});*/
-
-$(function () {
-    var fileupload = $("#FileUpload1");
-    var filePath = $("#spnFilePath");
-    var button = $("#btnFileUpload");
-    button.click(function () {
-        fileupload.click();
-    });
-    fileupload.change(function () {
-        var fileName = $(this).val().split('\\')[$(this).val().split('\\').length - 1];
-        filePath.html("<b>Selected File: </b>" + fileName);
-    });
-});
