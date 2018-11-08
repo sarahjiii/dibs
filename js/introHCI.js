@@ -11,7 +11,8 @@ $(document).ready(function() {
  * Function that is called when the document is ready.
  */
 function initializePage() {
-  if (location.href.includes("index.html") && !localStorage.getItem("curUser")) {
+  if (location.href.includes("index.html") && !localStorage.getItem("curUser")
+      && !localStorage.getItem("curPassword")) {
     location.replace("login.html");
   }
 	$( "nav" ).hide();
