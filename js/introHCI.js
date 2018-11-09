@@ -81,7 +81,7 @@ function postClick() {
       containsStr = containsStr + contains[i].defaultValue + " and ";
     }
   }
-  
+
   containsStr = containsStr.substring(0,containsStr.length - 5);
   var curUser = localStorage.getItem("curUser");
 
@@ -191,7 +191,7 @@ function claimClick(clicked_id) {
     alert("You can't claim your own food!");
   }
 
-  else{ 
+  else{
     $("#" + postName).fadeOut(); //have post disappear
     $("#" + postName).remove();
     console.log(claimName);
@@ -204,7 +204,7 @@ function claimClick(clicked_id) {
   }
 }
 
-  function displayMyPosts() {
+function displayMyPosts() {
   var source = $("#my-posts-template").html();
   var template = Handlebars.compile(source);
   var curUser = localStorage.getItem("curUser");
@@ -229,7 +229,7 @@ function claimClick(clicked_id) {
     if (curObject == null) {
       curObject = claimObject;
     }
-    console.log("curObject user: " + curObject.user);
+    //console.log("curObject user: " + curObject.user);
     if(curObject != null && curObject.user == curUser){
       console.log(curObject);
       var curHtml = template(curObject);
@@ -257,6 +257,43 @@ function addFriend() {
     console.log(friend);
     alert("You have added " + friend + " as a friend!");
     document.getElementById("addedFriend").value = '';
+}
+
+function deleteClick(clicked_id) {
+  console.log("clicked id " + clicked_id);
+  var postName = "post" + clicked_id;
+  var claimName = "claim" + clicked_id;
+  var claimed = true;
+
+  var curObject = JSON.parse(localStorage.getItem(claimName));
+  if (curObject == null) { //not claimed
+    curObject = JSON.parse(localStorage.getItem(postName))
+    console.log(curObject);
+    claimed = false;
+  }
+
+  var response = confirm("Do you want to delete " + curObject.foodItem + "?");
+  if (!response) {
+    return;
+  }
+
+  $("#" + claimName).fadeOut(); //have claim disappear
+  $("#" + claimName).remove();
+  $("#" + postName).fadeOut(); //have post disappear
+  $("#" + postName).remove();
+
+  var alertStr = "You just deleted " + curObject.foodItem;
+
+  if (claimed) {
+    localStorage.removeItem(claimName); //remove claim
+    alertStr = alertStr + "\n" + curObject.claimedUser + " has been notified"
+  }
+
+  else {
+    localStorage.removeItem(postName); //remove post
+  }
+
+  alert(alertStr);
 }
 
 function readURL() {

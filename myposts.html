@@ -38,15 +38,16 @@
 		<div class="jumbotron">
 			<h1>My Posts</h1>
         <script id="my-posts-template" type="text/x-handlebars-template">
-				<div class="post" >
+				<div class="post" id="post{{index}}">
 					<a class="thumbnail">
 						<p>Location: {{loc}}</p>
 						<img src="images/pizza.jpg" class="img-thumbnail">
 							<p><b>{{foodItem}}</b></p>
 							<p>Contains: {{contains}}</p>
 							<p>Claim by: {{time}}</p>
-							<button class="btn btn-info btn" id="unclaim{{index}}">EDIT</button>
-							<button class="btn btn-danger btn" id="unclaim{{index}}">DELETE</button>
+							<button class="btn btn-info btn" id="{{index}}">EDIT</button>
+							<button class="btn btn-danger btn" id="{{index}}"
+							onclick="deleteClick(this.id)">DELETE</button>
 					</a>
 				</div>
 			</script>
