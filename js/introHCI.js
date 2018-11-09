@@ -78,10 +78,11 @@ function postClick() {
   var containsStr = "";
   for (var i = 0; i < contains.length; i++) {
     if (contains[i].checked) {
-      containsStr = containsStr + contains[i].defaultValue + " ";
+      containsStr = containsStr + contains[i].defaultValue + " and ";
     }
   }
-
+  
+  containsStr = containsStr.substring(0,containsStr.length - 5);
   var curUser = localStorage.getItem("curUser");
 
   console.log(postObject);
