@@ -16,7 +16,7 @@
     <a href="myclaims.html"><li>My Claims</li></a>
     <a href="friends.html"><li>Friends</li></a>
     <a href="foodpref.html"><li>Food Preferences</li></a>
-    <a href="login.html"><li>Logout</li></a>
+    <a href="login.html" onclick="deleteUser()"><li>Logout</li></a>
   </ul>
 </nav>
 
@@ -31,34 +31,38 @@
 
 </head>
 
-<body>
+<body onload="displayMyPosts()">
   <div class="container">
 		<!-- h1 through h6 are headers. The higher the number, the smaller the header -->
 		<!-- p means paragraph -->
 		<div class="jumbotron">
 			<h1>My Posts</h1>
+        <p>View posts you've made here</p>
+        <script id="my-posts-template" type="text/x-handlebars-template">
+				<div class="post" id="post{{index}}">
+					<a class="thumbnail">
+						<p>Location: {{loc}}</p>
+						<img src="{{imgsrc}}" class="img-thumbnail">
+							<p><b>{{foodItem}}</b></p>
+							<p>Contains: {{contains}}</p>
+							<p>Claim by: {{time}}</p>
+							<p>Claimed by: {{claimedUser}}</p>
+							<button class="btn btn-danger btn" id="{{index}}"
+							onclick="deleteClick(this.id)">DELETE</button>
+					</a>
+				</div>
+			</script>
+      </div>
+			<div id="templatedMine">
+			  <!-- we will inject templated claims HTML code into here -->
+			</div>
 
-  		<div class="post" id="post1">
-  			<a href="" class="thumbnail">
-  				<img src="images/pizza.jpg" class="img-thumbnail">
-  				<p>Pizza</p>
-          <button class="btn btn-primary btn-s">Edit</button>
-          <button class="btn btn-danger btn-s">Delete</button>
-  			</a>
-  		</div>
-  		<div class="post" id="post2">
-  			<a href="#" class="thumbnail">
-  				<img src="images/lorempixel.city.1.jpeg" class="img-thumbnail">
-  				<p>French fries</p>
-          <button class="btn btn-primary btn-s">Edit</button>
-          <button class="btn btn-danger btn-s">Delete</button>
-  			</a>
-  		</div>
 
   <!-- include JavaScript near the end of the HTML file -->
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/introHCI.js"></script>
+	<script src="js/handlebars-v4.0.11.js"></script>
 
 	<!-- Add icon library -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">

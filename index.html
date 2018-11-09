@@ -18,7 +18,7 @@
     <a href="myclaims.html"><li>My Claims</li></a>
     <a href="friends.html"><li>Friends</li></a>
     <a href="foodpref.html"><li>Food Preferences</li></a>
-    <a href="login.html"><li>Logout</li></a>
+    <a href="login.html" onclick="deleteUser()"><li>Logout</li></a>
   </ul>
 </nav>
 
@@ -40,21 +40,22 @@
 		<div class="jumbotron">
 		</div>
 
-
+    <img id="testHomeImage" src="#" style="display:none"/>
 		<!-- divs are invisible structuring elements that stack vertically by default. Use them to organize your code -->
 		<!-- img tags are images. Lorem Pixel will deliver random images; handy! -->
 		<!-- a are anchors, also known as hyperlinks. Use the href attribute to tell the browser where to go when the user clicks -->
 
   <script id="entry-template" type="text/x-handlebars-template">
-    <div class="post" >
+    <div class="post" id="post{{index}}">
       <a class="thumbnail">
-        <p style="font-size:20px"><b>"username"</b></p>
-        <p>{{loc}}</p>
-        <img src="images/pizza.jpg" class="img-thumbnail">
+        <p style="font-size:20px"><b>{{user}}</b></p>
+        <p>Location: {{loc}}</p>
+        <img src="{{imgsrc}}" class="img-thumbnail">
           <p><b>{{foodItem}}</b></p>
           <p>Contains: {{contains}}</p>
           <p>Claim by: {{time}}</p>
-          <button class="btn btn-success btn">CLAIM</button>
+          <button id="{{index}}" class="btn btn-success btn"
+          onclick="claimClick(this.id)">CLAIM</button>
         </a>
   </div>
 </script>

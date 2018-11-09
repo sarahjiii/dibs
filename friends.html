@@ -16,7 +16,7 @@
     <a href="myclaims.html"><li>My Claims</li></a>
     <a href="friends.html"><li>Friends</li></a>
     <a href="foodpref.html"><li>Food Preferences</li></a>
-    <a href="login.html"><li>Logout</li></a>
+    <a href="login.html" onclick="deleteUser()"><li>Logout</li></a>
   </ul>
 </nav>
 
@@ -37,8 +37,9 @@
 		<!-- p means paragraph -->
 		<div class="jumbotron">
 			<h1>Friends</h1>
-      <textarea placeholder="Add a friend..."></textarea>
-			<p><button id="add" class="btn btn-primary btn-lg">Add</button></p>
+      <input type="text" placeholder="Add a friend..." id="addedFriend">
+			<p></p>
+			<p><button id="add" class="btn btn-primary btn-lg" onclick="addFriend()">Add</button></p>
 		</div>
 
   <!-- include JavaScript near the end of the HTML file -->
