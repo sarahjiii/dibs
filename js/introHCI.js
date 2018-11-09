@@ -185,20 +185,26 @@ function claimClick(clicked_id) {
   var postName = "post" + clicked_id;
   var claimName = "claim" + clicked_id;
 
-  $("#" + postName).fadeOut(); //have post disappear
-  $("#" + postName).remove();
-  console.log(claimName);
-
   var postObject = JSON.parse(localStorage.getItem(postName));
-  var time = postObject.time;
-  alert("You just claimed " + postObject.user + "'s " + postObject.foodItem +
-  "\nPlease pick it up by " + time + " at " + postObject.loc);
-  postObject.claimedUser = localStorage.getItem("curUser");
-  localStorage.setItem(claimName, JSON.stringify(postObject)); //add claim
-  localStorage.removeItem(postName); //remove post
+  // don't let users claim their own food
+  if(postObject.user == localStorage.getItem('curUser')){
+    alert("You can't claim your own food!");
+  }
+
+  else{ 
+    $("#" + postName).fadeOut(); //have post disappear
+    $("#" + postName).remove();
+    console.log(claimName);
+    var time = postObject.time;
+    alert("You just claimed " + postObject.user + "'s " + postObject.foodItem +
+      "\nPlease pick it up by " + time + " at " + postObject.loc);
+    postObject.claimedUser = localStorage.getItem("curUser");
+    localStorage.setItem(claimName, JSON.stringify(postObject)); //add claim
+    localStorage.removeItem(postName); //remove post
+  }
 }
 
-function displayMyPosts() {
+  function displayMyPosts() {
   var source = $("#my-posts-template").html();
   var template = Handlebars.compile(source);
   var curUser = localStorage.getItem("curUser");
