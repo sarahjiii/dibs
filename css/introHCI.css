@@ -24,7 +24,6 @@ body {
 
 .jumbotron:after {
      content:"";
-     background: url("../images/lorenpixel.jumbotron.jpeg");
      opacity: 0.2;
      top: 0;
      left: 0;
@@ -100,12 +99,6 @@ nav a:hover{text-decoration:none; color:#666;}
 	float:right;
 }
 
-.glyphicon-home{
-  color:white;
-  font-size:1.5em;
-  margin-top:5px;
-  margin:0 auto;
-}
 header{display:inline-block; font-size:14px;}
 span{padding-left:20px}
 a{color:#336699;}
