@@ -21,21 +21,6 @@ function initializePage() {
     });
 }
 
-// TRYING TO DISPLAY UPLOADED IMAGE
-// right now drawImage doesn't work with with the img
-/*function getBase64Image(img) {
-  var canvas = document.createElement("canvas");
-  canvas.width = img.width;
-  canvas.height = img.height;
-
-  var ctx = canvas.getContext("2d");
-  ctx.drawImage(img, 0, 0);
-
-  var dataURL = canvas.toDataURL("image/png");
-
-  return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
-}*/
-
 function saveUser(){
   var user = document.getElementById("user").value;
   var pass = document.getElementById("pass").value;
@@ -110,13 +95,6 @@ function postClick() {
 
 function displayPosts(){
 
-  // TRYING TO DISPLAY UPLOADED IMAGE
-  // more base64 stuff that doesn't work for some reason
-  /*var dataImage = localStorage.getItem('imgData');
-  var bannerImg = document.getElementById('testImage');
-  bannerImg.src = "data:image/png;base64," + dataImage;
-  bannerImg.style.display = "inline";*/
-
   var source = $("#entry-template").html();
   console.log("here she is");
   console.log(source);
@@ -131,6 +109,14 @@ function displayPosts(){
   else{
     postIndex = localStorage.getItem("postIndex");
   }
+
+  // THE IMAGE DISPLAYS ON HOME PAGE
+  var imagething = localStorage.getItem("image");
+  $('#testHomeImage')
+      .attr('src', imagething)
+      .width(300)
+      .height(300);
+  $('#testHomeImage').show();
 
   console.log("postIndex: ", postIndex);
   //clear the parentDiv to make sure we're not appending over and over again
