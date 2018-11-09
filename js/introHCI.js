@@ -60,6 +60,7 @@ function postClick() {
   var loc = document.getElementById("location").value;
   var time = document.getElementById("time").value;
   var contains = document.getElementsByName("contains");
+  var imgsrc = localStorage.getItem("image");
   var containsStr = "";
   for (var i = 0; i < contains.length; i++) {
     if (contains[i].checked) {
@@ -81,6 +82,7 @@ function postClick() {
     'index': postIndex,
     'foodItem': foodItem,
     'loc': loc,
+    'imgsrc': imgsrc,
     'time': time,
     'contains': containsStr,
     'user': curUser,
@@ -110,13 +112,13 @@ function displayPosts(){
     postIndex = localStorage.getItem("postIndex");
   }
 
-  // THE IMAGE DISPLAYS ON HOME PAGE
+  /* THE IMAGE DISPLAYS ON HOME PAGE
   var imagething = localStorage.getItem("image");
   $('#testHomeImage')
       .attr('src', imagething)
       .width(300)
       .height(300);
-  $('#testHomeImage').show();
+  $('#testHomeImage').show();*/
 
   console.log("postIndex: ", postIndex);
   //clear the parentDiv to make sure we're not appending over and over again
