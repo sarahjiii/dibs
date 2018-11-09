@@ -99,7 +99,7 @@ function postClick() {
     'time': time,
     'contains': containsStr,
     'user': curUser,
-    'claimedUser': ''}; //nobody has claimed it
+    'claimedUser': "No one yet"}; //nobody has claimed it
   var postName = "post" + postIndex;
 
   localStorage.setItem(postName, JSON.stringify(postObject));
