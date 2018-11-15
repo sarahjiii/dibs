@@ -4,6 +4,7 @@ $(document).ready(function() {
   $('#header').show();
 	initializePage();
   displayPosts();
+  displayAlerts();
 })
 
 
@@ -11,14 +12,51 @@ $(document).ready(function() {
  * Function that is called when the document is ready.
  */
 function initializePage() {
-  if (location.href.includes("index.html") && !localStorage.getItem("curUser")
-      && !localStorage.getItem("curPassword")) {
+  if (location.href.includes("index.html") && (!localStorage.getItem("curUser")
+      || !localStorage.getItem("curPassword"))) {
     location.replace("login.html");
   }
-	$( "nav" ).hide();
+  $( "nav" ).hide();
+
+  hardcodeUsers();
+  // load example posts
+  var post0 = {
+    'index': 0,
+    'foodItem': "Pepperoni Pizza",
+    'loc': "Geisel Library",
+    'imgsrc': "images/pizza.jpg",
+    'time': "5:45 PM",
+    'contains': "dairy pork",
+    'user': "example.post",
+    'claimedUser': "No one yet"};
+
+  var post1 = {
+      'index': 1,
+      'foodItem': "Chow Mein",
+      'loc': "CENTER 101",
+      'imgsrc': "images/noodles.jpg",
+      'time': "12:00 PM",
+      'contains': "gluten",
+      'user': "example.post",
+      'claimedUser': "No one yet"};
+      localStorage.setItem("post0", JSON.stringify(post0));
+      localStorage.setItem("post1", JSON.stringify(post1));
+
 	$( ".hamburger" ).click(function() {
 		$( "nav" ).slideToggle( "slow", function() {});
     });
+
+}
+
+function displayAlerts(){
+  var userAlerts = localStorage.getItem('curUser') + "Alerts";
+  var alerts = JSON.parse(localStorage.getItem(userAlerts));
+  console.log("Alerts: " + alerts);
+  for (var i = 0; i < alerts.length; i++) {
+    alert(alerts[i]);
+  }
+  alerts = [];
+  localStorage.setItem(userAlerts, JSON.stringify(alerts));
 }
 
 function saveUser(){
@@ -38,8 +76,119 @@ function saveUser(){
   }
 }
 
+function login() {
+  var user = document.getElementById("user").value;
+  var pass = document.getElementById("pass").value;
+
+  var users = JSON.parse(localStorage.getItem('users'));
+  var passes = JSON.parse(localStorage.getItem('passes'));
+
+  // check if the user and password are actually in our storage
+
+  // first find the user
+  var userFound = users.indexOf(user);
+  if(userFound == -1){
+    alert("Invalid username. Please create an account instead!");
+    return;
+  }
+  else{
+    var correctPass = passes[userFound];
+    if(correctPass != pass){
+      alert("Incorrect password, please try again.");
+      return;
+    }
+  }
+  localStorage.setItem("curUser", user);
+  localStorage.setItem("curPassword", pass);
+}
+
+function createAccount() {
+  var user = document.getElementById("user").value;
+  var pass = document.getElementById("pass").value;
+
+  var users = JSON.parse(localStorage.getItem('users'));
+  var passes = JSON.parse(localStorage.getItem('passes'));
+
+  // check if the user and password are actually in our storage
+
+  // first find the user
+  var userFound = users.indexOf(user);
+  //if username already taken or empty string as username, alert
+  if(userFound != -1 || user == ''){
+    alert("This username is taken. Use a new username to create an account");
+    return;
+  }
+  //invalid password
+  else if(pass == ''){
+    alert("Enter a password of at least one character");
+    return;
+  }
+  //valid password and username, so store it as curUser and add it to list of
+  //users
+  else{
+    localStorage.setItem("curUser", user);
+    localStorage.setItem("curPassword", pass);
+    users.push(user);
+    passes.push(pass);
+    localStorage.setItem("users", JSON.stringify(users));
+    localStorage.setItem("passes", JSON.stringify(passes));
+
+    var list = [];
+    localStorage.setItem(user + "Alerts", JSON.stringify(list));
+    var friends = [user, "example.post"];
+    localStorage.setItem(user + "Friends", JSON.stringify(friends));
+  }
+
+
+}
+
+function hardcodeUsers(){
+  var users = [];
+  users[0] = 'yasmine';
+  users[1] = 'meeta';
+  users[2] = 'sarah';
+
+  var passes = [];
+  passes[0] = 'pass';
+  passes[1] = 'mm';
+  passes[2] = 'ji';
+
+  var list = [];
+  localStorage.setItem('users', JSON.stringify(users));
+  localStorage.setItem('passes', JSON.stringify(passes));
+
+  if(localStorage.getItem('yasmineAlerts') == null){
+    localStorage.setItem('yasmineAlerts', JSON.stringify(list));
+  }
+
+  if(localStorage.getItem('meetaAlerts') == null){
+    localStorage.setItem('meetaAlerts', JSON.stringify(list));
+  }
+
+  if(localStorage.getItem('sarahAlerts') == null){
+    localStorage.setItem('sarahAlerts', JSON.stringify(list));
+  }
+
+  var list = ['meeta', 'sarah', 'yasmine', 'example.post'];
+
+  if(localStorage.getItem("yasmineFriends") == null){
+    localStorage.setItem("yasmineFriends", JSON.stringify(list));
+  }
+
+  if(localStorage.getItem("meetaFriends") == null){
+    localStorage.setItem("meetaFriends", JSON.stringify(list));
+  }
+
+  if(localStorage.getItem("sarahFriends") == null){
+    localStorage.setItem("sarahFriends", JSON.stringify(list));
+  }
+
+}
+
+
 function deleteUser(){
   localStorage.removeItem("curUser");
+  localStorage.removeItem("curPassword");
 }
 
 function saveFoodPref() {
@@ -72,7 +221,7 @@ function postClick() {
   var curUser = localStorage.getItem("curUser");
 
   console.log(postObject);
-  var postIndex = 0;
+  var postIndex = 2;
 
   if(localStorage.getItem("postIndex") != null){
     postIndex = parseInt(localStorage.getItem("postIndex"));
@@ -106,29 +255,21 @@ function displayPosts(){
   var postIndex;
 
   if(localStorage.getItem("postIndex") == null){
-    postIndex = 0;
+    postIndex = 2;
   }
   else{
     postIndex = localStorage.getItem("postIndex");
   }
 
-  /* THE IMAGE DISPLAYS ON HOME PAGE
-  var imagething = localStorage.getItem("image");
-  $('#testHomeImage')
-      .attr('src', imagething)
-      .width(300)
-      .height(300);
-  $('#testHomeImage').show();*/
-
   console.log("postIndex: ", postIndex);
   //clear the parentDiv to make sure we're not appending over and over again
   parentDiv.html("");
+  var curUserFriends = localStorage.getItem("curUser") + "Friends";
+  var friends = JSON.parse(localStorage.getItem(curUserFriends));
   for(var i = 0; i < postIndex; i++){
     var postId = "post" + i;
     var curObject = JSON.parse(localStorage.getItem(postId));
-    console.log("curObject");
-    console.log(curObject);
-    if (curObject != null) {
+    if (curObject != null && friends.includes(curObject.user)) {
       var curHtml = template(curObject);
       parentDiv.prepend(curHtml);
     }
@@ -147,7 +288,7 @@ function displayClaimedPosts() {
   var postIndex;
 
   if(localStorage.getItem("postIndex") == null){
-    postIndex = 0;
+    postIndex = 2;
   }
   else{
     postIndex = localStorage.getItem("postIndex");
@@ -189,6 +330,11 @@ function claimClick(clicked_id) {
     postObject.claimedUser = localStorage.getItem("curUser");
     localStorage.setItem(claimName, JSON.stringify(postObject)); //add claim
     localStorage.removeItem(postName); //remove post
+
+    var userAlerts = postObject.user + "Alerts";
+    var alerts = JSON.parse(localStorage.getItem(userAlerts));
+    alerts.push(localStorage.getItem("curUser") + " claimed your " + postObject.foodItem + "!");
+    localStorage.setItem(userAlerts, JSON.stringify(alerts));
   }
 }
 
@@ -243,6 +389,11 @@ function unclaimClick(clicked_id) {
 function addFriend() {
     var friend = document.getElementById("addedFriend").value;
     console.log(friend);
+    var curUser = localStorage.getItem("curUser");
+    var friends = JSON.parse(localStorage.getItem(curUser + "Friends"));
+    friends.push(friend);
+
+    localStorage.setItem(curUser + "Friends", JSON.stringify(friends));
     alert("You have added " + friend + " as a friend!");
     document.getElementById("addedFriend").value = '';
 }
