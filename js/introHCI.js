@@ -135,6 +135,8 @@ function createAccount() {
 
     var list = [];
     localStorage.setItem(user + "Alerts", JSON.stringify(list));
+    var friends = [user, "example.post"];
+    localStorage.setItem(user + "Friends", JSON.stringify(friends));
   }
 
 
@@ -166,6 +168,21 @@ function hardcodeUsers(){
   if(localStorage.getItem('sarahAlerts') == null){
     localStorage.setItem('sarahAlerts', JSON.stringify(list));
   }
+
+  var list = ['meeta', 'sarah', 'yasmine', 'example.post'];
+
+  if(localStorage.getItem("yasmineFriends") == null){
+    localStorage.setItem("yasmineFriends", JSON.stringify(list));
+  }
+
+  if(localStorage.getItem("meetaFriends") == null){
+    localStorage.setItem("meetaFriends", JSON.stringify(list));
+  }
+
+  if(localStorage.getItem("sarahFriends") == null){
+    localStorage.setItem("sarahFriends", JSON.stringify(list));
+  }
+
 }
 
 
@@ -247,12 +264,12 @@ function displayPosts(){
   console.log("postIndex: ", postIndex);
   //clear the parentDiv to make sure we're not appending over and over again
   parentDiv.html("");
+  var curUserFriends = localStorage.getItem("curUser") + "Friends";
+  var friends = JSON.parse(localStorage.getItem(curUserFriends));
   for(var i = 0; i < postIndex; i++){
     var postId = "post" + i;
     var curObject = JSON.parse(localStorage.getItem(postId));
-    console.log("curObject");
-    console.log(curObject);
-    if (curObject != null) {
+    if (curObject != null && friends.includes(curObject.user)) {
       var curHtml = template(curObject);
       parentDiv.prepend(curHtml);
     }
@@ -372,6 +389,11 @@ function unclaimClick(clicked_id) {
 function addFriend() {
     var friend = document.getElementById("addedFriend").value;
     console.log(friend);
+    var curUser = localStorage.getItem("curUser");
+    var friends = JSON.parse(localStorage.getItem(curUser + "Friends"));
+    friends.push(friend);
+
+    localStorage.setItem(curUser + "Friends", JSON.stringify(friends));
     alert("You have added " + friend + " as a friend!");
     document.getElementById("addedFriend").value = '';
 }
