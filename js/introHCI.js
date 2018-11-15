@@ -15,7 +15,31 @@ function initializePage() {
       && !localStorage.getItem("curPassword")) {
     location.replace("login.html");
   }
-	$( "nav" ).hide();
+  $( "nav" ).hide();
+
+  // load example posts
+  var post0 = {
+    'index': 0,
+    'foodItem': "Pepperoni Pizza",
+    'loc': "Geisel Library",
+    'imgsrc': "images/pizza.jpg",
+    'time': "5:45 PM",
+    'contains': "dairy pork",
+    'user': "example.post",
+    'claimedUser': "No one yet"};
+
+  var post1 = {
+      'index': 1,
+      'foodItem': "Chow Mein",
+      'loc': "CENTER 101",
+      'imgsrc': "images/noodles.jpg",
+      'time': "12:00 PM",
+      'contains': "gluten",
+      'user': "example.post",
+      'claimedUser': "No one yet"};
+      localStorage.setItem("post0", JSON.stringify(post0));
+      localStorage.setItem("post1", JSON.stringify(post1));
+
 	$( ".hamburger" ).click(function() {
 		$( "nav" ).slideToggle( "slow", function() {});
     });
@@ -72,7 +96,7 @@ function postClick() {
   var curUser = localStorage.getItem("curUser");
 
   console.log(postObject);
-  var postIndex = 0;
+  var postIndex = 2;
 
   if(localStorage.getItem("postIndex") != null){
     postIndex = parseInt(localStorage.getItem("postIndex"));
@@ -106,19 +130,11 @@ function displayPosts(){
   var postIndex;
 
   if(localStorage.getItem("postIndex") == null){
-    postIndex = 0;
+    postIndex = 2;
   }
   else{
     postIndex = localStorage.getItem("postIndex");
   }
-
-  /* THE IMAGE DISPLAYS ON HOME PAGE
-  var imagething = localStorage.getItem("image");
-  $('#testHomeImage')
-      .attr('src', imagething)
-      .width(300)
-      .height(300);
-  $('#testHomeImage').show();*/
 
   console.log("postIndex: ", postIndex);
   //clear the parentDiv to make sure we're not appending over and over again
@@ -147,7 +163,7 @@ function displayClaimedPosts() {
   var postIndex;
 
   if(localStorage.getItem("postIndex") == null){
-    postIndex = 0;
+    postIndex = 2;
   }
   else{
     postIndex = localStorage.getItem("postIndex");
