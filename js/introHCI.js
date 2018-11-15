@@ -4,6 +4,7 @@ $(document).ready(function() {
   $('#header').show();
 	initializePage();
   displayPosts();
+  displayAlerts();
 })
 
 
@@ -45,12 +46,12 @@ function initializePage() {
 		$( "nav" ).slideToggle( "slow", function() {});
     });
 
-  displayAlerts();
 }
 
 function displayAlerts(){
   var userAlerts = localStorage.getItem('curUser') + "Alerts";
   var alerts = JSON.parse(localStorage.getItem(userAlerts));
+  console.log("Alerts: " + alerts);
   for (var i = 0; i < alerts.length; i++) {
     alert(alerts[i]);
   }
@@ -154,9 +155,17 @@ function hardcodeUsers(){
   localStorage.setItem('users', JSON.stringify(users));
   localStorage.setItem('passes', JSON.stringify(passes));
 
-  localStorage.setItem('yasmineAlerts', JSON.stringify(list));
-  localStorage.setItem('meetaAlerts', JSON.stringify(list));
-  localStorage.setItem('sarahAlerts', JSON.stringify(list));
+  if(localStorage.getItem('yasmineAlerts') == null){
+    localStorage.setItem('yasmineAlerts', JSON.stringify(list));
+  }
+
+  if(localStorage.getItem('meetaAlerts') == null){
+    localStorage.setItem('meetaAlerts', JSON.stringify(list));
+  }
+
+  if(localStorage.getItem('sarahAlerts') == null){
+    localStorage.setItem('sarahAlerts', JSON.stringify(list));
+  }
 }
 
 
