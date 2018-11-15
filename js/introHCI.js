@@ -4,6 +4,7 @@ $(document).ready(function() {
   $('#header').show();
 	initializePage();
   displayPosts();
+  hardcodeUsers();
 })
 
 
@@ -38,8 +39,86 @@ function saveUser(){
   }
 }
 
+function login() {
+  var user = document.getElementById("user").value;
+  var pass = document.getElementById("pass").value;
+
+  var users = JSON.parse(localStorage.getItem('users'));
+  var passes = JSON.parse(localStorage.getItem('passes'));
+  
+  // check if the user and password are actually in our storage
+  
+  // first find the user
+  var userFound = users.indexOf(user);
+  if(userFound == -1){
+    alert("Invalid username. Please create an account instead!");
+    return;
+  }
+  else{
+    var correctPass = passes[userFound];
+    if(correctPass != pass){
+      alert("Incorrect password, please try again.");
+      return;
+    }
+  }
+  localStorage.setItem("curUser", user);
+  localStorage.setItem("curPassword", pass);
+}
+
+function createAccount() { 
+  var user = document.getElementById("user").value;
+  var pass = document.getElementById("pass").value;
+  
+  var users = JSON.parse(localStorage.getItem('users'));
+  var passes = JSON.parse(localStorage.getItem('passes'));
+  
+  // check if the user and password are actually in our storage
+  
+  // first find the user
+  var userFound = users.indexOf(user);
+  //if username already taken or empty string as username, alert
+  if(userFound != -1 || user == ''){
+    alert("This username is taken. Use a new username to create an account");
+    return;
+  }
+  //invalid password
+  else if(pass == ''){
+    alert("Enter a password of at least one character");
+    return;
+  }
+  //valid password and username, so store it as curUser and add it to list of
+  //users
+  else{
+    localStorage.setItem("curUser", user);
+    localStorage.setItem("curPassword", pass);
+    users.push(user);
+    passes.push(pass);
+    localStorage.setItem("users", JSON.stringify(users));
+    localStorage.setItem("passes", JSON.stringify(passes));
+  }
+
+
+}
+
+function hardcodeUsers(){
+  var users = [];
+  users[0] = 'yasmine';
+  users[1] = 'meeta';
+  users[2] = 'sarah';
+  
+  var passes = [];
+  passes[0] = 'pass';
+  passes[1] = 'mm';
+  passes[2] = 'ji';
+
+  localStorage.setItem('users', JSON.stringify(users));
+  localStorage.setItem('passes', JSON.stringify(passes));
+}
+
+
 function deleteUser(){
   localStorage.removeItem("curUser");
+  localStorage.removeItem("curPassword");
 }
 
 function saveFoodPref() {
