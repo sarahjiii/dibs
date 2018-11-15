@@ -44,6 +44,18 @@ function initializePage() {
 	$( ".hamburger" ).click(function() {
 		$( "nav" ).slideToggle( "slow", function() {});
     });
+
+  displayAlerts();
+}
+
+function displayAlerts(){
+  var userAlerts = localStorage.getItem('curUser') + "Alerts";
+  var alerts = JSON.parse(localStorage.getItem(userAlerts));
+  for (var i = 0; i < alerts.length; i++) {
+    alert(alerts[i]);
+  }
+  alerts = [];
+  localStorage.setItem(userAlerts, JSON.stringify(alerts));
 }
 
 function saveUser(){
@@ -69,9 +81,9 @@ function login() {
 
   var users = JSON.parse(localStorage.getItem('users'));
   var passes = JSON.parse(localStorage.getItem('passes'));
-  
+
   // check if the user and password are actually in our storage
-  
+
   // first find the user
   var userFound = users.indexOf(user);
   if(userFound == -1){
@@ -89,15 +101,15 @@ function login() {
   localStorage.setItem("curPassword", pass);
 }
 
-function createAccount() { 
+function createAccount() {
   var user = document.getElementById("user").value;
   var pass = document.getElementById("pass").value;
-  
+
   var users = JSON.parse(localStorage.getItem('users'));
   var passes = JSON.parse(localStorage.getItem('passes'));
-  
+
   // check if the user and password are actually in our storage
-  
+
   // first find the user
   var userFound = users.indexOf(user);
   //if username already taken or empty string as username, alert
@@ -119,6 +131,9 @@ function createAccount() {
     passes.push(pass);
     localStorage.setItem("users", JSON.stringify(users));
     localStorage.setItem("passes", JSON.stringify(passes));
+
+    var list = [];
+    localStorage.setItem(user + "Alerts", JSON.stringify(list));
   }
 
 
@@ -129,14 +144,19 @@ function hardcodeUsers(){
   users[0] = 'yasmine';
   users[1] = 'meeta';
   users[2] = 'sarah';
-  
+
   var passes = [];
   passes[0] = 'pass';
   passes[1] = 'mm';
   passes[2] = 'ji';
 
+  var list = [];
   localStorage.setItem('users', JSON.stringify(users));
   localStorage.setItem('passes', JSON.stringify(passes));
+
+  localStorage.setItem('yasmineAlerts', JSON.stringify(list));
+  localStorage.setItem('meetaAlerts', JSON.stringify(list));
+  localStorage.setItem('sarahAlerts', JSON.stringify(list));
 }
 
 
@@ -284,6 +304,11 @@ function claimClick(clicked_id) {
     postObject.claimedUser = localStorage.getItem("curUser");
     localStorage.setItem(claimName, JSON.stringify(postObject)); //add claim
     localStorage.removeItem(postName); //remove post
+
+    var userAlerts = postObject.user + "Alerts";
+    var alerts = JSON.parse(localStorage.getItem(userAlerts));
+    alerts.push(localStorage.getItem("curUser") + " claimed your " + postObject.foodItem + "!");
+    localStorage.setItem(userAlerts, JSON.stringify(alerts));
   }
 }
 
