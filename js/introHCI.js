@@ -19,6 +19,7 @@ function initializePage() {
   $( "nav" ).hide();
 
   hardcodeUsers();
+
   // load example posts
   var post0 = {
     'index': 0,
@@ -39,8 +40,11 @@ function initializePage() {
       'contains': "gluten",
       'user': "example.post",
       'claimedUser': "No one yet"};
-      localStorage.setItem("post0", JSON.stringify(post0));
-      localStorage.setItem("post1", JSON.stringify(post1));
+
+  if (!localStorage.getItem('post0') && !localStorage.getItem('claim0'))
+    localStorage.setItem("post0", JSON.stringify(post0));
+  if (!localStorage.getItem('post1') && !localStorage.getItem('claim1'))
+    localStorage.setItem("post1", JSON.stringify(post1));
 
 	$( ".hamburger" ).click(function() {
 		$( "nav" ).slideToggle( "slow", function() {});
@@ -98,8 +102,10 @@ function login() {
       return;
     }
   }
+
   localStorage.setItem("curUser", user);
   localStorage.setItem("curPassword", pass);
+  location.replace("index.html");
 }
 
 function createAccount() {
@@ -137,6 +143,8 @@ function createAccount() {
     localStorage.setItem(user + "Alerts", JSON.stringify(list));
     var friends = [user, "example.post"];
     localStorage.setItem(user + "Friends", JSON.stringify(friends));
+
+    location.replace("foodpref.html");
   }
 
 
@@ -154,8 +162,10 @@ function hardcodeUsers(){
   passes[2] = 'ji';
 
   var list = [];
-  localStorage.setItem('users', JSON.stringify(users));
-  localStorage.setItem('passes', JSON.stringify(passes));
+  if (localStorage.getItem('users') == null) {
+    localStorage.setItem('users', JSON.stringify(users));
+    localStorage.setItem('passes', JSON.stringify(passes));
+  }
 
   if(localStorage.getItem('yasmineAlerts') == null){
     localStorage.setItem('yasmineAlerts', JSON.stringify(list));
@@ -183,6 +193,7 @@ function hardcodeUsers(){
     localStorage.setItem("sarahFriends", JSON.stringify(list));
   }
 
+  localStorage.setItem("example.postAlerts", JSON.stringify(list));
 }
 
 
