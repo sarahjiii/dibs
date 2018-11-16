@@ -417,10 +417,20 @@ function unclaimClick(clicked_id) {
 function addFriend() {
     var friend = document.getElementById("addedFriend").value;
     console.log(friend);
+    var users = JSON.parse(localStorage.getItem('users'));
     var curUser = localStorage.getItem("curUser");
     var friends = JSON.parse(localStorage.getItem(curUser + "Friends"));
-    friends.push(friend);
 
+    if (!users.includes(friend)) {
+      alert("No user named " + friend);
+      return;
+    }
+    else if (friends.includes(friend)) {
+      alert("You are already friends with " + friend);
+      return;
+    }
+
+    friends.push(friend);
     localStorage.setItem(curUser + "Friends", JSON.stringify(friends));
     alert("You have added " + friend + " as a friend!");
     document.getElementById("addedFriend").value = '';
