@@ -228,6 +228,21 @@ function postClick() {
     }
   }
 
+  if (foodItem == "") {
+    alert("Please enter food item.");
+    return;
+  }
+
+  else if (loc == "") {
+    alert("Please enter location of pick up.");
+    return;
+  }
+
+  else if (imgsrc == "" || imgsrc == null) {
+    alert("Please select a photo.");
+    return;
+  }
+
   containsStr = containsStr.substring(0,containsStr.length - 5);
   var curUser = localStorage.getItem("curUser");
 
@@ -253,6 +268,7 @@ function postClick() {
   postIndex = postIndex + 1;
   localStorage.removeItem("postIndex");
   localStorage.setItem("postIndex", postIndex);
+  location.replace("index.html");
 }
 
 function displayPosts(){
