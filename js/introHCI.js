@@ -268,6 +268,7 @@ function postClick() {
   postIndex = postIndex + 1;
   localStorage.removeItem("postIndex");
   localStorage.setItem("postIndex", postIndex);
+  localStorage.removeItem("image");
   location.replace("index.html");
 }
 
