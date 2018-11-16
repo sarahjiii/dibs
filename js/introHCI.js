@@ -220,6 +220,7 @@ function postClick() {
   var loc = document.getElementById("location").value;
   var time = document.getElementById("time").value;
   var contains = document.getElementsByName("contains");
+  var snack = document.getElementById("postSnack");
   var imgsrc = localStorage.getItem("image");
   var containsStr = "";
   for (var i = 0; i < contains.length; i++) {
@@ -229,17 +230,23 @@ function postClick() {
   }
 
   if (foodItem == "") {
-    alert("Please enter food item.");
+    snack.innerHTML = "Please enter food item.";
+    snack.className = "show";
+    setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
     return;
   }
 
   else if (loc == "") {
-    alert("Please enter location of pick up.");
+    snack.innerHTML = "Please enter location of pick up.";
+    snack.className = "show";
+    setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
     return;
   }
 
   else if (imgsrc == "" || imgsrc == null) {
-    alert("Please select a photo.");
+    snack.innerHTML = "Please select a photo.";
+    snack.className = "show";
+    setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
     return;
   }
 
@@ -340,11 +347,15 @@ function claimClick(clicked_id) {
   console.log("clicked_id: " + clicked_id);
   var postName = "post" + clicked_id;
   var claimName = "claim" + clicked_id;
+  var snack = document.getElementById("claimSnack");
 
   var postObject = JSON.parse(localStorage.getItem(postName));
   // don't let users claim their own food
   if(postObject.user == localStorage.getItem('curUser')){
-    alert("You can't claim your own food!");
+    snack.innerHTML = "You can't claim your own food!";
+    snack.className = "show";
+    setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
+    //alert("You can't claim your own food!");
   }
 
   else{
@@ -352,8 +363,13 @@ function claimClick(clicked_id) {
     $("#" + postName).remove();
     console.log(claimName);
     var time = postObject.time;
-    alert("You just claimed " + postObject.user + "'s " + postObject.foodItem +
-      "\nPlease pick it up by " + time + " at " + postObject.loc);
+    snack.innerHTML = "You just claimed " + postObject.user + "'s " + postObject.foodItem + ". " +
+      "\nPlease pick it up by " + time + " at " + postObject.loc + ".";
+    snack.className = "show";
+    setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 5000);
+
+    //alert("You just claimed " + postObject.user + "'s " + postObject.foodItem +
+      //"\nPlease pick it up by " + time + " at " + postObject.loc);
     postObject.claimedUser = localStorage.getItem("curUser");
     localStorage.setItem(claimName, JSON.stringify(postObject)); //add claim
     localStorage.removeItem(postName); //remove post
