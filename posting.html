@@ -36,39 +36,16 @@
 		<!-- p means paragraph -->
 		<div class="jumbotron">
 			<h1>Put something up for dibs:</h1>
+      <p>Food Item</p>
       <p><textarea id="foodItem" placeholder="What are you putting up for dibs?"></textarea>
-        <img id="btnFileUpload" onclick="readURL()" src="images/camera.png" width="65px" height="65px" style="border:3px solid black; margin: 0px 20px"/>
+        <p sty>Choose Photo</p>
+        <img id="btnFileUpload" onclick="readURL()" src="images/camera.png" width="65px" height="65px" style="border:3px solid black; margin: 0px 20px;"/>
         <span id="spnFilePath"></span>
         <input type="file" id="FileUpload1" accept="image/*" style="display:none"/>
         <img id="testImage" src="#" style="display:none"/>
-        <!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-        <script type="text/javascript">
-        $(function () {
-          var fileupload = $("#FileUpload1");
-          var filePath = $("#spnFilePath");
-          var button = $("#btnFileUpload");
-          button.click(function () {
-              fileupload.click();
-            });
-            fileupload.change(function () {
-              var file = document.getElementById('FileUpload1').files[0];
-              console.log(file);
-              if (file) {
-                // create reader
-                var reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = function(e) {
-                  // browser completed reading file - display it
-                  alert(e.target.result);
-                };
-              }
-              var fileName = $(this).val().split('\\')[$(this).val().split('\\').length - 1];
-              filePath.html("<b>Selected File: </b>" + fileName);
-            });
-          });
-        </script> -->
       </p>
-      <p><textarea id="location" placeholder="Location of pick up"></textarea></p>
+      <p>Location of Pick Up</p>
+      <p><textarea id="location" placeholder="Where should your friends pick it up?"></textarea></p>
       <b>Pick up by: <input id="time" type="time" name="usr_time" value="13:30"></b>
 			<div class="contains">
 				<b>Contains:</b>
