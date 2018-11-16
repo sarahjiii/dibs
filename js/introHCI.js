@@ -422,6 +422,7 @@ function addFriend() {
 
     localStorage.setItem(curUser + "Friends", JSON.stringify(friends));
     alert("You have added " + friend + " as a friend!");
+    $("#friends").append("<p>" + friend + "</p>");
     document.getElementById("addedFriend").value = '';
 }
 
