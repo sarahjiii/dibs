@@ -380,9 +380,7 @@ function claimClick(clicked_id) {
     var time = postObject.time;
     snack.innerHTML = "You just claimed " + postObject.user + "'s " + postObject.foodItem + ". " +"\nPlease pick it up by " + time + " at " + postObject.loc + ".";
     snack.className = "show";
-    setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 7000);
-    //alert("You just claimed " + postObject.user + "'s " + postObject.foodItem +
-      //"\nPlease pick it up by " + time + " at " + postObject.loc);
+    setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
     postObject.claimedUser = localStorage.getItem("curUser");
     localStorage.setItem(claimName, JSON.stringify(postObject)); //add claim
     localStorage.removeItem(postName); //remove post
@@ -432,12 +430,15 @@ function displayMyPosts() {
 function unclaimClick(clicked_id) {
   var postName = "post" + clicked_id;
   var claimName = "claim" + clicked_id;
+  var snack = document.getElementById("unclaimSnack");
 
   $("#" + claimName).fadeOut(); //have claim disappear
   $("#" + claimName).remove();
   var claimObject = JSON.parse(localStorage.getItem(claimName));
-  alert("You just UNclaimed " + claimObject.user + "'s " + claimObject.foodItem +
-  "\n" + claimObject.user + " has been notified");
+  snack.innerHTML = "You just UNclaimed " + claimObject.user + "'s " + claimObject.foodItem + ". "
+    "\n" + claimObject.user + " has been notified."
+  snack.className = "show";
+  setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
   localStorage.setItem(postName, JSON.stringify(claimObject)); //add claim
   localStorage.removeItem(claimName); //remove post
 }
@@ -477,7 +478,6 @@ function addFriend() {
     snack.innerHTML = "You have added " + friend + " as a friend!";
     snack.className = "show";
     setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
-    //alert("You have added " + friend + " as a friend!");
     $("#friends").append("<p>" + friend + "</p>");
     document.getElementById("addedFriend").value = '';
 }
