@@ -216,7 +216,7 @@ function saveFoodPref() {
   var editedPref = prefString.substring(0,prefString.length - 5);
 
   localStorage.setItem(curUser + "Prefs", JSON.stringify(array));
-  alert("Your food preferences of " + editedPref + " were saved");
+  alert("Your food preferences of were saved");
 }
 
 function postClick() {
@@ -284,7 +284,6 @@ function postClick() {
 }
 
 function displayPosts(){
-
   var source = $("#entry-template").html();
   console.log("here she is");
   console.log(source);
@@ -304,11 +303,22 @@ function displayPosts(){
   //clear the parentDiv to make sure we're not appending over and over again
   parentDiv.html("");
   var curUserFriends = localStorage.getItem("curUser") + "Friends";
+  var curUserPrefs = localStorage.getItem("curUser") + "Prefs";
   var friends = JSON.parse(localStorage.getItem(curUserFriends));
+  var prefs = JSON.parse(localStorage.getItem(curUserPrefs));
   for(var i = 0; i < postIndex; i++){
     var postId = "post" + i;
     var curObject = JSON.parse(localStorage.getItem(postId));
-    if (curObject != null && friends.includes(curObject.user)) {
+    var curObjContains = curObject.contains.split(" and ");
+    containsAllergy = false;
+    if (prefs != null) {
+      for (var j = 0; j < curObjContains.length; j++) {
+        if (prefs.includes(curObjContains[j])) 
+          containsAllergy = true;
+      }
+    }
+
+    if (curObject != null && friends.includes(curObject.user) && !containsAllergy) {
       var curHtml = template(curObject);
       parentDiv.prepend(curHtml);
     }
