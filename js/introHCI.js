@@ -27,7 +27,7 @@ function initializePage() {
     'loc': "Geisel Library",
     'imgsrc': "images/pizza.jpg",
     'time': "5:45 PM",
-    'contains': "dairy pork",
+    'contains': "dairy and pork",
     'user': "example.post",
     'claimedUser': "No one yet"};
 
@@ -204,6 +204,7 @@ function deleteUser(){
 
 function saveFoodPref() {
   var prefs = document.getElementsByName("pref");
+  var curUser = localStorage.getItem("curUser");
   var prefString = "";
   for(var i = 0; i < prefs.length; i++){
     if (prefs[i].checked) {
@@ -211,7 +212,8 @@ function saveFoodPref() {
     }
   }
   var editedPref = prefString.substring(0,prefString.length - 5);
-  localStorage.setItem("preferences", editedPref);
+
+  localStorage.setItem(curUser + "Prefs", JSON.stringify(prefs));
   alert("Your food preferences of " + editedPref + " were saved");
 }
 
