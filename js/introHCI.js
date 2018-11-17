@@ -444,27 +444,30 @@ function addFriend() {
       snack.innerHTML = "You cannot be friends with yourself.";
       snack.className = "show";
       setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
-      //alert("You cannot be friends with yourself.");
+      document.getElementById("addedFriend").value = '';
       return;
     }
     else if (!users.includes(friend)) {
       snack.innerHTML = "No user named " + friend +".";
       snack.className = "show";
       setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
-      //alert("No user named " + friend);
+      document.getElementById("addedFriend").value = '';
       return;
     }
     else if (friends.includes(friend)) {
       snack.innerHTML = "You are already friends with " + friend +".";
       snack.className = "show";
       setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
-      //alert("You are already friends with " + friend);
+      document.getElementById("addedFriend").value = '';
       return;
     }
 
     friends.push(friend);
     localStorage.setItem(curUser + "Friends", JSON.stringify(friends));
-    alert("You have added " + friend + " as a friend!");
+    snack.innerHTML = "You have added " + friend + " as a friend!";
+    snack.className = "show";
+    setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
+    //alert("You have added " + friend + " as a friend!");
     $("#friends").append("<p>" + friend + "</p>");
     document.getElementById("addedFriend").value = '';
 }
