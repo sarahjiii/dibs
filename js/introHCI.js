@@ -421,7 +421,11 @@ function addFriend() {
     var curUser = localStorage.getItem("curUser");
     var friends = JSON.parse(localStorage.getItem(curUser + "Friends"));
 
-    if (!users.includes(friend)) {
+    if (friend == curUser) {
+      alert("You cannot be friends with yourself.");
+      return;
+    }
+    else if (!users.includes(friend)) {
       alert("No user named " + friend);
       return;
     }
