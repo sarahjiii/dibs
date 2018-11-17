@@ -206,14 +206,16 @@ function saveFoodPref() {
   var prefs = document.getElementsByName("pref");
   var curUser = localStorage.getItem("curUser");
   var prefString = "";
+  var array = [];
   for(var i = 0; i < prefs.length; i++){
     if (prefs[i].checked) {
       prefString = prefString + prefs[i].defaultValue + " and ";
+      array.push(prefs[i].defaultValue);
     }
   }
   var editedPref = prefString.substring(0,prefString.length - 5);
 
-  localStorage.setItem(curUser + "Prefs", JSON.stringify(prefs));
+  localStorage.setItem(curUser + "Prefs", JSON.stringify(array));
   alert("Your food preferences of " + editedPref + " were saved");
 }
 
