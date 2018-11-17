@@ -27,7 +27,7 @@ function initializePage() {
     'loc': "Geisel Library",
     'imgsrc': "images/pizza.jpg",
     'time': "5:45 PM",
-    'contains': "dairy pork",
+    'contains': "dairy and pork",
     'user': "example.post",
     'claimedUser': "No one yet"};
 
@@ -204,14 +204,18 @@ function deleteUser(){
 
 function saveFoodPref() {
   var prefs = document.getElementsByName("pref");
+  var curUser = localStorage.getItem("curUser");
   var prefString = "";
+  var array = [];
   for(var i = 0; i < prefs.length; i++){
     if (prefs[i].checked) {
       prefString = prefString + prefs[i].defaultValue + " and ";
+      array.push(prefs[i].defaultValue);
     }
   }
   var editedPref = prefString.substring(0,prefString.length - 5);
-  localStorage.setItem("preferences", editedPref);
+
+  localStorage.setItem(curUser + "Prefs", JSON.stringify(array));
   alert("Your food preferences of " + editedPref + " were saved");
 }
 
@@ -435,7 +439,11 @@ function addFriend() {
     var curUser = localStorage.getItem("curUser");
     var friends = JSON.parse(localStorage.getItem(curUser + "Friends"));
 
-    if (!users.includes(friend)) {
+    if (friend == curUser) {
+      alert("You cannot be friends with yourself.");
+      return;
+    }
+    else if (!users.includes(friend)) {
       alert("No user named " + friend);
       return;
     }

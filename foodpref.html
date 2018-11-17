@@ -41,13 +41,20 @@
       <p>Check all foods you <b>don't</b> eat</p>
 
 			<div class="pref">
-				<input type="checkbox" name="pref" value="dairy"> Dairy<br>
-				<input type="checkbox" name="pref" value="peanuts"> Peanuts<br>
-				<input type="checkbox" name="pref" value="pork"> Pork<br>
-				<input type="checkbox" name="pref" value="chicken"> Chicken<br>
-				<input type="checkbox" name="pref" value="beef"> Beef<br>
-				<input type="checkbox" name="pref" value="gluten"> Gluten<br>
+				<input id="dairy" type="checkbox" name="pref" value="dairy"> Dairy<br>
+				<input id="peanuts" type="checkbox" name="pref" value="peanuts"> Peanuts<br>
+				<input id="pork" type="checkbox" name="pref" value="pork"> Pork<br>
+				<input id="chicken" type="checkbox" name="pref" value="chicken"> Chicken<br>
+				<input id="beef" type="checkbox" name="pref" value="beef"> Beef<br>
+				<input id="gluten" type="checkbox" name="pref" value="gluten"> Gluten<br>
 			</div>
+      <script>
+        var user = localStorage.getItem('curUser');
+        var userPrefs = JSON.parse(localStorage.getItem(user + "Prefs"));
+        for (var i = 0; i < userPrefs.length; i++) {
+          document.getElementById(userPrefs[i]).checked = true;
+        }
+      </script>
 			<p><a href="index.html"><button id="testjs" class="btn btn-primary
       btn-lg" onclick="saveFoodPref()">Save</button></a></p>
 		</div>
