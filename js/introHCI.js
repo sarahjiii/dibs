@@ -447,23 +447,36 @@ function addFriend() {
     var users = JSON.parse(localStorage.getItem('users'));
     var curUser = localStorage.getItem("curUser");
     var friends = JSON.parse(localStorage.getItem(curUser + "Friends"));
+    var snack = document.getElementById("friendSnack");
 
     if (friend == curUser) {
-      alert("You cannot be friends with yourself.");
+      snack.innerHTML = "You cannot be friends with yourself.";
+      snack.className = "show";
+      setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
+      document.getElementById("addedFriend").value = '';
       return;
     }
     else if (!users.includes(friend)) {
-      alert("No user named " + friend);
+      snack.innerHTML = "No user named " + friend +".";
+      snack.className = "show";
+      setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
+      document.getElementById("addedFriend").value = '';
       return;
     }
     else if (friends.includes(friend)) {
-      alert("You are already friends with " + friend);
+      snack.innerHTML = "You are already friends with " + friend +".";
+      snack.className = "show";
+      setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
+      document.getElementById("addedFriend").value = '';
       return;
     }
 
     friends.push(friend);
     localStorage.setItem(curUser + "Friends", JSON.stringify(friends));
-    alert("You have added " + friend + " as a friend!");
+    snack.innerHTML = "You have added " + friend + " as a friend!";
+    snack.className = "show";
+    setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
+    //alert("You have added " + friend + " as a friend!");
     $("#friends").append("<p>" + friend + "</p>");
     document.getElementById("addedFriend").value = '';
 }
