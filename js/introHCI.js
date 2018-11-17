@@ -353,7 +353,7 @@ function claimClick(clicked_id) {
   var postName = "post" + clicked_id;
   var claimName = "claim" + clicked_id;
   var snack = document.getElementById("claimSnack");
-  
+
   var postObject = JSON.parse(localStorage.getItem(postName));
   // don't let users claim their own food
   if(postObject.user == localStorage.getItem('curUser')){
@@ -438,17 +438,27 @@ function addFriend() {
     var users = JSON.parse(localStorage.getItem('users'));
     var curUser = localStorage.getItem("curUser");
     var friends = JSON.parse(localStorage.getItem(curUser + "Friends"));
+    var snack = document.getElementById("friendSnack");
 
     if (friend == curUser) {
-      alert("You cannot be friends with yourself.");
+      snack.innerHTML = "You cannot be friends with yourself.";
+      snack.className = "show";
+      setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
+      //alert("You cannot be friends with yourself.");
       return;
     }
     else if (!users.includes(friend)) {
-      alert("No user named " + friend);
+      snack.innerHTML = "No user named " + friend +".";
+      snack.className = "show";
+      setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
+      //alert("No user named " + friend);
       return;
     }
     else if (friends.includes(friend)) {
-      alert("You are already friends with " + friend);
+      snack.innerHTML = "You are already friends with " + friend +".";
+      snack.className = "show";
+      setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
+      //alert("You are already friends with " + friend);
       return;
     }
 
