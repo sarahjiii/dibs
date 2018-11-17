@@ -309,12 +309,14 @@ function displayPosts(){
   for(var i = 0; i < postIndex; i++){
     var postId = "post" + i;
     var curObject = JSON.parse(localStorage.getItem(postId));
-    var curObjContains = curObject.contains.split(" and ");
-    containsAllergy = false;
-    if (prefs != null) {
-      for (var j = 0; j < curObjContains.length; j++) {
-        if (prefs.includes(curObjContains[j])) 
-          containsAllergy = true;
+    if (curObject != null) {
+      var curObjContains = curObject.contains.split(" and ");
+      var containsAllergy = false;
+      if (prefs != null) {
+        for (var j = 0; j < curObjContains.length; j++) {
+          if (prefs.includes(curObjContains[j]))
+            containsAllergy = true;
+        }
       }
     }
 
