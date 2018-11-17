@@ -216,7 +216,7 @@ function saveFoodPref() {
   var editedPref = prefString.substring(0,prefString.length - 5);
 
   localStorage.setItem(curUser + "Prefs", JSON.stringify(array));
-  alert("Your food preferences of were saved");
+  alert("Your food preferences were saved!");
 }
 
 function postClick() {
