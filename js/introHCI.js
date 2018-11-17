@@ -311,9 +311,10 @@ function displayPosts(){
     var curObject = JSON.parse(localStorage.getItem(postId));
     var curObjContains = curObject.contains.split(" and ");
     containsAllergy = false;
-    for (var j = 0; j < curObjContains.length; j++) {
-      if (prefs.includes(curObjContains[j])) {
-        containsAllergy = true;
+    if (prefs != null) {
+      for (var j = 0; j < curObjContains.length; j++) {
+        if (prefs.includes(curObjContains[j])) 
+          containsAllergy = true;
       }
     }
 
