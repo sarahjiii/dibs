@@ -19,6 +19,7 @@ function initializePage() {
   $( "nav" ).hide();
 
   hardcodeUsers();
+
   // load example posts
   var post0 = {
     'index': 0,
@@ -26,7 +27,7 @@ function initializePage() {
     'loc': "Geisel Library",
     'imgsrc': "images/pizza.jpg",
     'time': "5:45 PM",
-    'contains': "dairy pork",
+    'contains': "dairy and pork",
     'user': "example.post",
     'claimedUser': "No one yet"};
 
@@ -39,8 +40,11 @@ function initializePage() {
       'contains': "gluten",
       'user': "example.post",
       'claimedUser': "No one yet"};
-      localStorage.setItem("post0", JSON.stringify(post0));
-      localStorage.setItem("post1", JSON.stringify(post1));
+
+  if (!localStorage.getItem('post0') && !localStorage.getItem('claim0'))
+    localStorage.setItem("post0", JSON.stringify(post0));
+  if (!localStorage.getItem('post1') && !localStorage.getItem('claim1'))
+    localStorage.setItem("post1", JSON.stringify(post1));
 
 	$( ".hamburger" ).click(function() {
 		$( "nav" ).slideToggle( "slow", function() {});
@@ -98,8 +102,10 @@ function login() {
       return;
     }
   }
+
   localStorage.setItem("curUser", user);
   localStorage.setItem("curPassword", pass);
+  location.replace("index.html");
 }
 
 function createAccount() {
@@ -137,6 +143,8 @@ function createAccount() {
     localStorage.setItem(user + "Alerts", JSON.stringify(list));
     var friends = [user, "example.post"];
     localStorage.setItem(user + "Friends", JSON.stringify(friends));
+
+    location.replace("foodpref.html");
   }
 
 
@@ -154,8 +162,10 @@ function hardcodeUsers(){
   passes[2] = 'ji';
 
   var list = [];
-  localStorage.setItem('users', JSON.stringify(users));
-  localStorage.setItem('passes', JSON.stringify(passes));
+  if (localStorage.getItem('users') == null) {
+    localStorage.setItem('users', JSON.stringify(users));
+    localStorage.setItem('passes', JSON.stringify(passes));
+  }
 
   if(localStorage.getItem('yasmineAlerts') == null){
     localStorage.setItem('yasmineAlerts', JSON.stringify(list));
@@ -183,6 +193,7 @@ function hardcodeUsers(){
     localStorage.setItem("sarahFriends", JSON.stringify(list));
   }
 
+  localStorage.setItem("example.postAlerts", JSON.stringify(list));
 }
 
 
@@ -193,15 +204,19 @@ function deleteUser(){
 
 function saveFoodPref() {
   var prefs = document.getElementsByName("pref");
+  var curUser = localStorage.getItem("curUser");
   var prefString = "";
+  var array = [];
   for(var i = 0; i < prefs.length; i++){
     if (prefs[i].checked) {
       prefString = prefString + prefs[i].defaultValue + " and ";
+      array.push(prefs[i].defaultValue);
     }
   }
   var editedPref = prefString.substring(0,prefString.length - 5);
-  localStorage.setItem("preferences", editedPref);
-  alert("Your food preferences of " + editedPref + " were saved");
+
+  localStorage.setItem(curUser + "Prefs", JSON.stringify(array));
+  alert("Your food preferences were saved!");
 }
 
 function postClick() {
@@ -209,12 +224,34 @@ function postClick() {
   var loc = document.getElementById("location").value;
   var time = document.getElementById("time").value;
   var contains = document.getElementsByName("contains");
+  var snack = document.getElementById("postSnack");
   var imgsrc = localStorage.getItem("image");
   var containsStr = "";
   for (var i = 0; i < contains.length; i++) {
     if (contains[i].checked) {
       containsStr = containsStr + contains[i].defaultValue + " and ";
     }
+  }
+
+  if (foodItem == "") {
+    snack.innerHTML = "Please enter food item.";
+    snack.className = "show";
+    setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
+    return;
+  }
+
+  else if (loc == "") {
+    snack.innerHTML = "Please enter location of pick up.";
+    snack.className = "show";
+    setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
+    return;
+  }
+
+  else if (imgsrc == "" || imgsrc == null) {
+    snack.innerHTML = "Please select a photo.";
+    snack.className = "show";
+    setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
+    return;
   }
 
   containsStr = containsStr.substring(0,containsStr.length - 5);
@@ -242,10 +279,11 @@ function postClick() {
   postIndex = postIndex + 1;
   localStorage.removeItem("postIndex");
   localStorage.setItem("postIndex", postIndex);
+  localStorage.removeItem("image");
+  location.replace("index.html");
 }
 
 function displayPosts(){
-
   var source = $("#entry-template").html();
   console.log("here she is");
   console.log(source);
@@ -265,11 +303,24 @@ function displayPosts(){
   //clear the parentDiv to make sure we're not appending over and over again
   parentDiv.html("");
   var curUserFriends = localStorage.getItem("curUser") + "Friends";
+  var curUserPrefs = localStorage.getItem("curUser") + "Prefs";
   var friends = JSON.parse(localStorage.getItem(curUserFriends));
+  var prefs = JSON.parse(localStorage.getItem(curUserPrefs));
   for(var i = 0; i < postIndex; i++){
     var postId = "post" + i;
     var curObject = JSON.parse(localStorage.getItem(postId));
-    if (curObject != null && friends.includes(curObject.user)) {
+    if (curObject != null) {
+      var curObjContains = curObject.contains.split(" and ");
+      var containsAllergy = false;
+      if (prefs != null) {
+        for (var j = 0; j < curObjContains.length; j++) {
+          if (prefs.includes(curObjContains[j]))
+            containsAllergy = true;
+        }
+      }
+    }
+
+    if (curObject != null && friends.includes(curObject.user) && !containsAllergy) {
       var curHtml = template(curObject);
       parentDiv.prepend(curHtml);
     }
@@ -313,20 +364,25 @@ function claimClick(clicked_id) {
   console.log("clicked_id: " + clicked_id);
   var postName = "post" + clicked_id;
   var claimName = "claim" + clicked_id;
+  var snack = document.getElementById("claimSnack");
 
   var postObject = JSON.parse(localStorage.getItem(postName));
   // don't let users claim their own food
   if(postObject.user == localStorage.getItem('curUser')){
-    alert("You can't claim your own food!");
+    snack.innerHTML = "You can't claim your own food!";
+    snack.className = "show";
+    setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
   }
+
 
   else{
     $("#" + postName).fadeOut(); //have post disappear
     $("#" + postName).remove();
     console.log(claimName);
     var time = postObject.time;
-    alert("You just claimed " + postObject.user + "'s " + postObject.foodItem +
-      "\nPlease pick it up by " + time + " at " + postObject.loc);
+    snack.innerHTML = "You just claimed " + postObject.user + "'s " + postObject.foodItem + ". " +"\nPlease pick it up by " + time + " at " + postObject.loc + ".";
+    snack.className = "show";
+    setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
     postObject.claimedUser = localStorage.getItem("curUser");
     localStorage.setItem(claimName, JSON.stringify(postObject)); //add claim
     localStorage.removeItem(postName); //remove post
@@ -376,12 +432,15 @@ function displayMyPosts() {
 function unclaimClick(clicked_id) {
   var postName = "post" + clicked_id;
   var claimName = "claim" + clicked_id;
+  var snack = document.getElementById("unclaimSnack");
 
   $("#" + claimName).fadeOut(); //have claim disappear
   $("#" + claimName).remove();
   var claimObject = JSON.parse(localStorage.getItem(claimName));
-  alert("You just UNclaimed " + claimObject.user + "'s " + claimObject.foodItem +
-  "\n" + claimObject.user + " has been notified");
+  snack.innerHTML = "You just UNclaimed " + claimObject.user + "'s " + claimObject.foodItem + ". "
+    "\n" + claimObject.user + " has been notified."
+  snack.className = "show";
+  setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
   localStorage.setItem(postName, JSON.stringify(claimObject)); //add claim
   localStorage.removeItem(claimName); //remove post
 }
@@ -389,12 +448,39 @@ function unclaimClick(clicked_id) {
 function addFriend() {
     var friend = document.getElementById("addedFriend").value;
     console.log(friend);
+    var users = JSON.parse(localStorage.getItem('users'));
     var curUser = localStorage.getItem("curUser");
     var friends = JSON.parse(localStorage.getItem(curUser + "Friends"));
-    friends.push(friend);
+    var snack = document.getElementById("friendSnack");
 
+    if (friend == curUser) {
+      snack.innerHTML = "You cannot be friends with yourself.";
+      snack.className = "show";
+      setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
+      document.getElementById("addedFriend").value = '';
+      return;
+    }
+    else if (!users.includes(friend)) {
+      snack.innerHTML = "No user named " + friend +".";
+      snack.className = "show";
+      setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
+      document.getElementById("addedFriend").value = '';
+      return;
+    }
+    else if (friends.includes(friend)) {
+      snack.innerHTML = "You are already friends with " + friend +".";
+      snack.className = "show";
+      setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
+      document.getElementById("addedFriend").value = '';
+      return;
+    }
+
+    friends.push(friend);
     localStorage.setItem(curUser + "Friends", JSON.stringify(friends));
-    alert("You have added " + friend + " as a friend!");
+    snack.innerHTML = "You have added " + friend + " as a friend!";
+    snack.className = "show";
+    setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
+    $("#friends").append("<p>" + friend + "</p>");
     document.getElementById("addedFriend").value = '';
 }
 
