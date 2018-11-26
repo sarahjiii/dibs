@@ -290,7 +290,10 @@ function postClick() {
     'time': time,
     'contains': containsStr,
     'user': curUser,
-    'claimedUser': "No one yet"}; //nobody has claimed it
+    'claimedUser': "No one yet", //nobody has claimed it
+    'class': "btn btn-success btn",
+    'function': "claimClick(this.id)",
+    'buttonText': "CLAIM"};
   var postName = "post" + postIndex;
 
   localStorage.setItem(postName, JSON.stringify(postObject));
@@ -337,6 +340,12 @@ function displayPosts(){
               containsAllergy = true;
           }
         }
+      }
+      // if it's your own post, a delete button is displayed instead
+      else {
+        curObject.class = "btn btn-danger btn";
+        curObject.function = "deleteClick(this.id)";
+        curObject.buttonText = "DELETE";
       }
 
       if (friends.includes(curObject.user) && !containsAllergy) {
