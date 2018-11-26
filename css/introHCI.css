@@ -99,6 +99,21 @@ nav a:hover{text-decoration:none; color:#666;}
 	float:right;
 }
 
+.infoButton {
+	background-color: #ffffff00; /* Transparent background */
+	border: none; /* Remove borders */
+	color: black; /* Black */
+	font-size: 1.0em;
+	cursor: pointer; /* Mouse pointer on hover */
+}
+
+.info {
+	display: none;
+	font-size: 19px;
+	line-height: 22px;
+	color: black;
+}
+
 input[type='checkbox'] {
   width:30px;
   height:30px;

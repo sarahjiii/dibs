@@ -330,17 +330,19 @@ function displayPosts(){
     if (curObject != null) {
       var curObjContains = curObject.contains.split(" and ");
       var containsAllergy = false;
-      if (prefs != null) {
-        for (var j = 0; j < curObjContains.length; j++) {
-          if (prefs.includes(curObjContains[j]))
-            containsAllergy = true;
+      if (curObject.user != localStorage.getItem('curUser')) {
+        if (prefs != null) {
+          for (var j = 0; j < curObjContains.length; j++) {
+            if (prefs.includes(curObjContains[j]))
+              containsAllergy = true;
+          }
         }
       }
-    }
 
-    if (curObject != null && friends.includes(curObject.user) && !containsAllergy) {
-      var curHtml = template(curObject);
-      parentDiv.prepend(curHtml);
+      if (friends.includes(curObject.user) && !containsAllergy) {
+        var curHtml = template(curObject);
+        parentDiv.prepend(curHtml);
+      }
     }
   }
 }
@@ -593,3 +595,14 @@ function readURL() {
       filePath.html("<b>Selected File: </b>" + fileName);
     });
   }
+
+//show contains info
+function showInfo(value) {
+  var x = document.getElementById(value + 'Info');
+    if (x.style.display === 'block') {
+        x.style.display = 'none';
+    }
+    else {
+        x.style.display = 'block';
+    }
+}
