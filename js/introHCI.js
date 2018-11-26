@@ -219,10 +219,28 @@ function saveFoodPref() {
   alert("Your food preferences were saved!");
 }
 
+//given time in military time, convert it to AM/PM
+function convertTime(time){
+  var timeArray = time.split(":");
+  var hours = timeArray[0];
+  var mins = timeArray[1];
+  var hoursInt = parseInt(hours, 10);
+  var ampm = " AM";
+  var finalTime = "";
+  if(hoursInt > 12){
+    hoursInt -= 12;
+    ampm = " PM";
+  }
+  finalTime = hoursInt.toString() + ":" + mins + ampm;
+  return finalTime;
+}
+
 function postClick() {
   var foodItem = document.getElementById("foodItem").value;
   var loc = document.getElementById("location").value;
   var time = document.getElementById("time").value;
+  time = convertTime(time);
+  console.log(time);
   var contains = document.getElementsByName("contains");
   var snack = document.getElementById("postSnack");
   var imgsrc = localStorage.getItem("image");
