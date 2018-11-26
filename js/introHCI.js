@@ -1,11 +1,11 @@
 //var postIndex = 0;
 // Call this function when the page loads (the jQuery "ready" event)
 $(document).ready(function() {
-  $('#header').show();
-	initializePage();
-  displayPosts();
-  displayAlerts();
-})
+    $('#header').show();
+    initializePage();
+    displayPosts();
+    displayAlerts();
+    })
 
 
 /*
@@ -13,7 +13,7 @@ $(document).ready(function() {
  */
 function initializePage() {
   if (location.href.includes("index.html") && (!localStorage.getItem("curUser")
-      || !localStorage.getItem("curPassword"))) {
+        || !localStorage.getItem("curPassword"))) {
     location.replace("login.html");
   }
   $( "nav" ).hide();
@@ -32,23 +32,23 @@ function initializePage() {
     'claimedUser': "No one yet"};
 
   var post1 = {
-      'index': 1,
-      'foodItem': "Chow Mein",
-      'loc': "CENTER 101",
-      'imgsrc': "images/noodles.jpg",
-      'time': "12:00 PM",
-      'contains': "gluten",
-      'user': "example.post",
-      'claimedUser': "No one yet"};
+    'index': 1,
+    'foodItem': "Chow Mein",
+    'loc': "CENTER 101",
+    'imgsrc': "images/noodles.jpg",
+    'time': "12:00 PM",
+    'contains': "gluten",
+    'user': "example.post",
+    'claimedUser': "No one yet"};
 
   if (!localStorage.getItem('post0') && !localStorage.getItem('claim0'))
     localStorage.setItem("post0", JSON.stringify(post0));
   if (!localStorage.getItem('post1') && !localStorage.getItem('claim1'))
     localStorage.setItem("post1", JSON.stringify(post1));
 
-	$( ".hamburger" ).click(function() {
-		$( "nav" ).slideToggle( "slow", function() {});
-    });
+  $( ".hamburger" ).click(function() {
+      $( "nav" ).slideToggle( "slow", function() {});
+      });
 
 }
 
@@ -439,49 +439,72 @@ function unclaimClick(clicked_id) {
   var claimObject = JSON.parse(localStorage.getItem(claimName));
   snack.innerHTML = "You just UNclaimed " + claimObject.user + "'s " + claimObject.foodItem + ". "
     "\n" + claimObject.user + " has been notified."
-  snack.className = "show";
+    snack.className = "show";
   setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
   localStorage.setItem(postName, JSON.stringify(claimObject)); //add claim
   localStorage.removeItem(claimName); //remove post
 }
 
 function addFriend() {
-    var friend = document.getElementById("addedFriend").value;
-    console.log(friend);
-    var users = JSON.parse(localStorage.getItem('users'));
-    var curUser = localStorage.getItem("curUser");
-    var friends = JSON.parse(localStorage.getItem(curUser + "Friends"));
-    var snack = document.getElementById("friendSnack");
+  //displayFriends();
+  var friend = document.getElementById("addedFriend").value;
+  console.log(friend);
+  var users = JSON.parse(localStorage.getItem('users'));
+  var curUser = localStorage.getItem("curUser");
+  var friends = JSON.parse(localStorage.getItem(curUser + "Friends"));
+  var snack = document.getElementById("friendSnack");
 
-    if (friend == curUser) {
-      snack.innerHTML = "You cannot be friends with yourself.";
-      snack.className = "show";
-      setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
-      document.getElementById("addedFriend").value = '';
-      return;
-    }
-    else if (!users.includes(friend)) {
-      snack.innerHTML = "No user named " + friend +".";
-      snack.className = "show";
-      setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
-      document.getElementById("addedFriend").value = '';
-      return;
-    }
-    else if (friends.includes(friend)) {
-      snack.innerHTML = "You are already friends with " + friend +".";
-      snack.className = "show";
-      setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
-      document.getElementById("addedFriend").value = '';
-      return;
-    }
-
-    friends.push(friend);
-    localStorage.setItem(curUser + "Friends", JSON.stringify(friends));
-    snack.innerHTML = "You have added " + friend + " as a friend!";
+  if (friend == curUser) {
+    snack.innerHTML = "You cannot be friends with yourself.";
     snack.className = "show";
     setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
-    $("#friends").append("<p>" + friend + "</p>");
     document.getElementById("addedFriend").value = '';
+    return;
+  }
+  else if (!users.includes(friend)) {
+    snack.innerHTML = "No user named " + friend +".";
+    snack.className = "show";
+    setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
+    document.getElementById("addedFriend").value = '';
+    return;
+  }
+  else if (friends.includes(friend)) {
+    snack.innerHTML = "You are already friends with " + friend +".";
+    snack.className = "show";
+    setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
+    document.getElementById("addedFriend").value = '';
+    return;
+  }
+
+  friends.push(friend);
+  localStorage.setItem(curUser + "Friends", JSON.stringify(friends));
+  snack.innerHTML = "You have added " + friend + " as a friend!";
+  snack.className = "show";
+  setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
+  var friendsString = displayFriends();
+  document.getElementById("friends").innerHTML = friendsString;
+  //$("#friends").append("<p>" + friend + "</p>");
+  document.getElementById("addedFriend").value = '';
+}
+
+function displayFriends() {
+  var user = localStorage.getItem("curUser");
+  var curUserFriends = user + "Friends";
+  var friendsList = JSON.parse(localStorage.getItem(curUserFriends));
+  var allFriends = "";
+  if (friendsList.length == 2){
+    allFriends = "No friends added yet";
+  }
+  else{
+    for(var i = 0; i < friendsList.length; i++){
+      if(friendsList[i] != user && friendsList[i] != "example.post"){
+        allFriends = allFriends + "<p>" + friendsList[i] + "</p>";
+      }
+    }
+    console.log("all friends: " + allFriends);
+    //document.getElementById("friends").innerHTML = allFriends;
+  }
+  return allFriends;
 }
 
 function deleteClick(clicked_id) {
