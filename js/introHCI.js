@@ -29,7 +29,10 @@ function initializePage() {
     'time': "5:45 PM",
     'contains': "dairy and pork",
     'user': "example.post",
-    'claimedUser': "No one yet"};
+    'claimedUser': "No one yet",
+    'class': "btn btn-success btn",
+    'function': "claimClick(this.id)",
+    'buttonText': "CLAIM"};
 
   var post1 = {
     'index': 1,
@@ -39,7 +42,10 @@ function initializePage() {
     'time': "12:00 PM",
     'contains': "gluten",
     'user': "example.post",
-    'claimedUser': "No one yet"};
+    'claimedUser': "No one yet",
+    'class': "btn btn-success btn",
+    'function': "claimClick(this.id)",
+    'buttonText': "CLAIM"};
 
   if (!localStorage.getItem('post0') && !localStorage.getItem('claim0'))
     localStorage.setItem("post0", JSON.stringify(post0));
