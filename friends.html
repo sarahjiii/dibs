@@ -42,8 +42,29 @@
 			<p><button id="add" class="btn btn-primary btn-lg" onclick="addFriend()">Add</button></p>
       <b>Your current friends:</b>
       <div id="friends">
-        <p> No friends added yet - add them above by their username! </p>
+       <!-- <p> No friends added yet - add them above by their username! </p>
+            -->
       </div>
+      <script>
+        var user = localStorage.getItem("curUser");
+        var curUserFriends = user + "Friends";
+        var friendsList = JSON.parse(localStorage.getItem(curUserFriends));
+        var allFriends = "";
+        if (friendsList.length == 2){
+          allFriends = "No friends added yet - add them above by their username! ";
+        }
+        else{
+          for(var i = 0; i < friendsList.length; i++){
+            if(friendsList[i] != user && friendsList[i] != "example.post"){
+                allFriends = allFriends + "<p>" + friendsList[i] + "</p>";
+            }
+          }
+        console.log("all friends: " + allFriends);
+    //document.getElementById("friends").innerHTML = allFriends;
+        }
+        
+        document.getElementById("friends").innerHTML = allFriends;
+      </script>
 		</div>
 
 		<div id="friendSnack">Error message...</div>

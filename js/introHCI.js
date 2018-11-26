@@ -481,13 +481,13 @@ function addFriend() {
   snack.innerHTML = "You have added " + friend + " as a friend!";
   snack.className = "show";
   setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
-  var friendsString = displayFriends();
+  var friendsString = getFriends();
   document.getElementById("friends").innerHTML = friendsString;
   //$("#friends").append("<p>" + friend + "</p>");
   document.getElementById("addedFriend").value = '';
 }
 
-function displayFriends() {
+function getFriends() {
   var user = localStorage.getItem("curUser");
   var curUserFriends = user + "Friends";
   var friendsList = JSON.parse(localStorage.getItem(curUserFriends));
