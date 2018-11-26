@@ -1,0 +1,77 @@
+<!doctype html>
+
+<html>
+
+<header>
+  <span>
+    <button class="hamburger"><i class="fa fa-bars"></i></button>
+    <a href="index.html"><button class="homeButton"><i class="fa fa-home"></i></button></a>
+    <b class="title"> Dibs </b>
+    <a href="posting.html"><button class="postButton"><i class="fa fa-edit"></i></button></a>
+
+  </span>
+</header>
+
+<nav>
+  <ul>
+    <a href="myposts.html"><li>My Posts</li></a>
+    <a href="myclaims.html"><li>My Claims</li></a>
+    <a href="friends.html"><li>Friends</li></a>
+    <a href="foodpref.html"><li>Food Preferences</li></a>
+    <a href="login.html" onclick="deleteUser()"><li>Logout</li></a>
+  </ul>
+</nav>
+
+<head>
+	<title>Dibs App</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/bootstrap-theme.min.css" rel="stylesheet">
+	<link href="css/introHCI.css" rel="stylesheet">
+	<!-- this is a comment in HTML -->
+
+</head>
+
+<body>
+	<div class="container">
+		<!-- h1 through h6 are headers. The higher the number, the smaller the header -->
+		<!-- p means paragraph -->
+		<div class="jumbotron">
+		</div>
+
+		<!-- divs are invisible structuring elements that stack vertically by default. Use them to organize your code -->
+		<!-- img tags are images. Lorem Pixel will deliver random images; handy! -->
+		<!-- a are anchors, also known as hyperlinks. Use the href attribute to tell the browser where to go when the user clicks -->
+
+  <script id="entry-template" type="text/x-handlebars-template">
+    <div class="post" id="post{{index}}">
+      <a class="thumbnail">
+        <p style="font-size:20px"><b>{{user}}</b></p>
+        <p>Location: {{loc}}</p>
+        <img src="{{imgsrc}}" class="img-thumbnail">
+          <p><b>{{foodItem}}</b></p>
+          <p>Contains: {{contains}}</p>
+          <p>Claim by: {{time}}</p>
+          <button id="{{index}}" class="{{class}}"
+          onclick="{{function}}">{{buttonText}}</button>
+        </a>
+  </div>
+</script>
+
+<div id="templatedPosts">
+  <!-- we will inject templated post HTML code into here -->
+</div>
+
+<div id="claimSnack">Error message...</div>
+
+  <!-- include JavaScript near the end of the HTML file -->
+	<script src="https://code.jquery.com/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+  <script src="js/handlebars-v4.0.11.js"></script>
+	<script src="js/introHCI2.js"></script>
+
+  <!-- Add icon library -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+</body>
+</html>

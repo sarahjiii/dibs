@@ -337,7 +337,7 @@ function displayPosts(){
     var postId = "post" + i;
     var curObject = JSON.parse(localStorage.getItem(postId));
     //Comment out second part of if for version B
-    if (curObject != null && curObject.claimedUser == "No one yet") {
+    if (curObject != null) { //&& curObject.claimedUser == "No one yet") {
       var curObjContains = curObject.contains.split(" and ");
       var containsAllergy = false;
       if (curObject.user != localStorage.getItem('curUser')) {
@@ -412,8 +412,8 @@ function claimClick(clicked_id) {
 
 
   else{
-    $("#" + postName).fadeOut(); //have post disappear //comment out for version b
-    $("#" + postName).remove(); //comment out for version b
+    //$("#" + postName).fadeOut(); //have post disappear //comment out for version b
+    //$("#" + postName).remove(); //comment out for version b
     //console.log(claimName);
     var time = postObject.time;
     snack.innerHTML = "You just claimed " + postObject.user + "'s " + postObject.foodItem + ". " +"\nPlease pick it up by " + time + " at " + postObject.loc + ".";
