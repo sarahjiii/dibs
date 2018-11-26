@@ -354,6 +354,12 @@ function displayPosts(){
         curObject.function = "deleteClick(this.id)";
         curObject.buttonText = "DELETE";
       }
+      console.log(curObject.claimedUser);
+      if (curObject.claimedUser != localStorage.getItem('curUser')) {
+        curObject.class = "btn btn-success btn";
+        curObject.function = "checkClick(this.id)";
+        curObject.buttonText = "CLAIM";
+      }
 
       if (friends.includes(curObject.user) && !containsAllergy) {
         var curHtml = template(curObject);
