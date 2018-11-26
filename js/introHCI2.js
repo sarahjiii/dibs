@@ -420,6 +420,9 @@ function claimClick(clicked_id) {
     snack.className = "show";
     setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
     postObject.claimedUser = localStorage.getItem("curUser");
+    /*postObject.class = "btn btn-info btn";
+    postObject.function = "unclaimClick(this.id)";
+    postObject.buttonText = "UNCLAIM";*/
     localStorage.setItem(postName, JSON.stringify(postObject)); //add claim
     //localStorage.removeItem(postName); //remove post
 
@@ -468,16 +471,19 @@ function displayMyPosts() {
 function unclaimClick(clicked_id) {
   var postName = "post" + clicked_id;
   //var claimName = "claim" + clicked_id;
-  var snack = document.getElementById("unclaimSnack");
+  var snack = document.getElementById("claimSnack");
 
-  $("#" + postName).fadeOut(); //have claim disappear
-  $("#" + postName).remove();
+  //$("#" + postName).fadeOut(); //have claim disappear
+  //$("#" + postName).remove();
   var postObject = JSON.parse(localStorage.getItem(postName));
   postObject.claimedUser = "No one yet";
   snack.innerHTML = "You just UNclaimed " + postObject.user + "'s " + postObject.foodItem + ". "
     "\n" + postObject.user + " has been notified."
     snack.className = "show";
   setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
+  /*postObject.class = "btn btn-success btn";
+  postObject.function = "claimClick(this.id)";
+  postObject.buttonText = "CLAIM";*/
   localStorage.setItem(postName, JSON.stringify(postObject)); //add claim
   //localStorage.removeItem(claimName); //remove post
 }
@@ -622,4 +628,26 @@ function showInfo(value) {
     else {
         x.style.display = 'block';
     }
+}
+
+// checks what button is being clicked (claim/unclaim)
+function checkClick(clicked_id) {
+  var postname = "post" + clicked_id;
+  var postObject = JSON.parse(localStorage.getItem(postname));
+  var btn = document.getElementById(clicked_id);
+  var btn_value = document.getElementById(clicked_id).innerHTML;
+  console.log(btn_value);
+  if (btn_value == "UNCLAIM") {
+    btn.innerHTML = "CLAIM";
+    btn.style.backgroundColor = "#32CD32";
+    postObject.buttonText = "CLAIM";
+    unclaimClick(clicked_id);
+  }
+  else {
+    btn.innerHTML = "UNCLAIM";
+    btn.style.backgroundColor = "#20B2AA";
+    postObject.buttonText = "UNCLAIM";
+    claimClick(clicked_id);
+  }
+  localStorage.setItem(postname, JSON.stringify(postObject));
 }
