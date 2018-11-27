@@ -336,6 +336,7 @@ function displayPosts(){
   for(var i = 0; i < postIndex; i++){
     var postId = "post" + i;
     var curObject = JSON.parse(localStorage.getItem(postId));
+    console.log("claimed user for post " + i + ": " + curObject.claimedUser);
     //Comment out second part of if for version B
     if (curObject != null) { //&& curObject.claimedUser == "No one yet") {
       var curObjContains = curObject.contains.split(" and ");
@@ -354,12 +355,20 @@ function displayPosts(){
         curObject.function = "deleteClick(this.id)";
         curObject.buttonText = "DELETE";
       }
-      console.log(curObject.claimedUser);
-      if (curObject.claimedUser != localStorage.getItem('curUser')) {
+
+      // if it's claimed by someone, and that someone != curUser, make the
+      // button say CANNOT CLAIM
+      if(curObject.claimedUser != "No one yet" && curObject.claimedUser != localStorage.getItem('curUser')){
+        curObject.class = "btn btn-secondary btn";
+        curObject.function = "checkClick(this.id)";
+        curObject.buttonText = "CANNOT CLAIM";
+      }
+
+      /*if (curObject.claimedUser != localStorage.getItem('curUser')) {
         curObject.class = "btn btn-success btn";
         curObject.function = "checkClick(this.id)";
         curObject.buttonText = "CLAIM";
-      }
+      }*/
 
       if (friends.includes(curObject.user) && !containsAllergy) {
         var curHtml = template(curObject);
@@ -402,6 +411,7 @@ function displayClaimedPosts() {
   }
 }
 
+//return false if claim wasn't successful 
 function claimClick(clicked_id) {
   console.log("clicked_id: " + clicked_id);
   var postName = "post" + clicked_id;
@@ -414,8 +424,16 @@ function claimClick(clicked_id) {
     snack.innerHTML = "You can't claim your own food!";
     snack.className = "show";
     setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
+    return false;
   }
 
+  // if it's already claimed by someone
+  if(postObject.claimedUser != "No one yet"){
+    snack.innerHTML = "This food has already been claimed - you cannot claim it!";
+    snack.className = "show";
+    setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
+    return false;
+  }
 
   else{
     //$("#" + postName).fadeOut(); //have post disappear //comment out for version b
@@ -429,14 +447,19 @@ function claimClick(clicked_id) {
     /*postObject.class = "btn btn-info btn";
     postObject.function = "unclaimClick(this.id)";
     postObject.buttonText = "UNCLAIM";*/
+    console.log("claimedUser inside claimClick is: " + postObject.claimedUser + " for post " + clicked_id);
     localStorage.setItem(postName, JSON.stringify(postObject)); //add claim
     //localStorage.removeItem(postName); //remove post
 
+
+    //add a new alert for the user whose food we just claimed
     var userAlerts = postObject.user + "Alerts";
     var alerts = JSON.parse(localStorage.getItem(userAlerts));
     alerts.push(localStorage.getItem("curUser") + " claimed your " + postObject.foodItem + "!");
     localStorage.setItem(userAlerts, JSON.stringify(alerts));
   }
+  console.log("just claimed: " + clicked_id);
+  return true;
 }
 
 function displayMyPosts() {
@@ -647,13 +670,25 @@ function checkClick(clicked_id) {
     btn.innerHTML = "CLAIM";
     btn.style.backgroundColor = "#32CD32";
     postObject.buttonText = "CLAIM";
+    localStorage.setItem(postname, JSON.stringify(postObject));
     unclaimClick(clicked_id);
   }
-  else {
+  else if (btn_value == "CLAIM"){
     btn.innerHTML = "UNCLAIM";
     btn.style.backgroundColor = "#20B2AA";
     postObject.buttonText = "UNCLAIM";
+    localStorage.setItem(postname, JSON.stringify(postObject));
+    var success = claimClick(clicked_id);
+    if(!success){
+      btn.innerHTML = "CLAIM";
+      btn.style.backgroundColor = "#32CD32";
+      postObject.buttonText = "CLAIM";
+      localStorage.setItem(postname, JSON.stringify(postObject));
+    }
+  }
+  //else, it says CANNOT CLAIM, so call claimClick and in there it'll say you
+  //cannot claim it
+  else{
     claimClick(clicked_id);
   }
-  localStorage.setItem(postname, JSON.stringify(postObject));
 }
