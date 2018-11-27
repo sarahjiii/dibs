@@ -361,7 +361,7 @@ function displayPosts(){
 
       // if it's claimed by someone, and that someone != curUser, make the
       // button say CANNOT CLAIM
-      if(curObject.claimedUser != "No one yet" && curObject.claimedUser != localStorage.getItem('curUser')){
+      if(curObject.claimedUser != "No one yet" && curObject.claimedUser != localStorage.getItem('curUser') && curObject.user != localStorage.getItem("curUser")){
         curObject.class = "btn btn-light btn";
         curObject.function = "checkClick(this.id)";
         curObject.buttonText = "TAKEN - CANNOT CLAIM";
@@ -635,7 +635,7 @@ function deleteClick(clicked_id) {
     localStorage.removeItem(postName); //remove post
   }
 
-  alert(alertStr);
+  //alert(alertStr);
 }
 
 function readURL() {
@@ -705,7 +705,11 @@ function checkClick(clicked_id) {
       localStorage.setItem(postname, JSON.stringify(postObject));
     }
   }
-  //else, it says CANNOT CLAIM, so call claimClick and in there it'll say you
+
+  else if(btn_value == "DELETE"){
+    deleteClick(clicked_id);
+  }
+  //else, it says TAKEN - CANNOT CLAIM, so call claimClick and in there it'll say you
   //cannot claim it
   else{
     claimClick(clicked_id);

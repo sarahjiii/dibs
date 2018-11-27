@@ -578,7 +578,7 @@ function deleteClick(clicked_id) {
     localStorage.removeItem(postName); //remove post
   }
 
-  alert(alertStr);
+  //alert(alertStr);
 }
 
 function readURL() {
