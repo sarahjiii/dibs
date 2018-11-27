@@ -414,7 +414,7 @@ function displayClaimedPosts() {
   }
 }
 
-//return false if claim wasn't successful 
+//return false if claim wasn't successful
 function claimClick(clicked_id) {
   console.log("clicked_id: " + clicked_id);
   var postName = "post" + clicked_id;
@@ -447,6 +447,9 @@ function claimClick(clicked_id) {
     snack.className = "show";
     setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
     postObject.claimedUser = localStorage.getItem("curUser");
+    //Set claimed user NOW
+    var claimedUserText = document.getElementById("claimedUser" + clicked_id);
+    claimedUserText.innerHTML = "Claimed by: " + postObject.claimedUser;
 
     //Set color NOW
     var thumbnail = document.getElementById("thumbnail" + clicked_id);
@@ -515,14 +518,16 @@ function unclaimClick(clicked_id) {
   //$("#" + postName).fadeOut(); //have claim disappear
   //$("#" + postName).remove();
 
+  var postObject = JSON.parse(localStorage.getItem(postName));
   //Set color NOW
   var thumbnail = document.getElementById("thumbnail" + clicked_id);
   thumbnail.style.backgroundColor = "white";
   //Set color FOREVER
   postObject.color = "white";
-
-  var postObject = JSON.parse(localStorage.getItem(postName));
   postObject.claimedUser = "No one yet";
+  //Set claimed user NOW
+  var claimedUserText = document.getElementById("claimedUser" + clicked_id);
+  claimedUserText.innerHTML = "Claimed by: " + postObject.claimedUser;
   snack.innerHTML = "You just UNclaimed " + postObject.user + "'s " + postObject.foodItem + ". "
     "\n" + postObject.user + " has been notified."
     snack.className = "show";
