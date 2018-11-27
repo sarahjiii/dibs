@@ -690,20 +690,17 @@ function checkClick(clicked_id) {
   console.log(btn_value);
   if (btn_value == "UNCLAIM") {
     btn.innerHTML = "CLAIM";
-    btn.style.backgroundColor = "#32CD32";
     postObject.buttonText = "CLAIM";
     localStorage.setItem(postname, JSON.stringify(postObject));
     unclaimClick(clicked_id);
   }
   else if (btn_value == "CLAIM"){
     btn.innerHTML = "UNCLAIM";
-    btn.style.backgroundColor = "#20B2AA";
     postObject.buttonText = "UNCLAIM";
     localStorage.setItem(postname, JSON.stringify(postObject));
     var success = claimClick(clicked_id);
     if(!success){
       btn.innerHTML = "CLAIM";
-      btn.style.backgroundColor = "#32CD32";
       postObject.buttonText = "CLAIM";
       localStorage.setItem(postname, JSON.stringify(postObject));
     }
