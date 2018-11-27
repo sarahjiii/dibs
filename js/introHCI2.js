@@ -414,7 +414,7 @@ function displayClaimedPosts() {
   }
 }
 
-//return false if claim wasn't successful 
+//return false if claim wasn't successful
 function claimClick(clicked_id) {
   console.log("clicked_id: " + clicked_id);
   var postName = "post" + clicked_id;
