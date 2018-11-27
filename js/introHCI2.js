@@ -362,9 +362,9 @@ function displayPosts(){
       // if it's claimed by someone, and that someone != curUser, make the
       // button say CANNOT CLAIM
       if(curObject.claimedUser != "No one yet" && curObject.claimedUser != localStorage.getItem('curUser')){
-        curObject.class = "btn btn-secondary btn";
+        curObject.class = "btn btn-light btn";
         curObject.function = "checkClick(this.id)";
-        curObject.buttonText = "CANNOT CLAIM";
+        curObject.buttonText = "TAKEN - CANNOT CLAIM";
       }
 
       /*if (curObject.claimedUser != localStorage.getItem('curUser')) {
