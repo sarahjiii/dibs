@@ -13,7 +13,7 @@
    the CSS to the page. feel free to remove it once the link is working. */
 body {
      border: 1px dotted gray;
-     padding: 20px;
+     padding: 10px;
 		 background-color:#EAD1DCFF;
 }
 
@@ -61,6 +61,10 @@ nav ul li a { text-decoration:none;  margin: 0px; color:#666;}
 nav ul li a:hover {  color: #666; text-decoration:none;}
 nav a{text-decoration:none; color:#666;}
 nav a:hover{text-decoration:none; color:#666;}
+
+.thumbnail{
+	border-color: lightGrey;
+}
 
 .hamburger{
 	background-color: #ffffff00; /* Transparent background */
