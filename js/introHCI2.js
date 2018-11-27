@@ -362,9 +362,9 @@ function displayPosts(){
       // if it's claimed by someone, and that someone != curUser, make the
       // button say CANNOT CLAIM
       if(curObject.claimedUser != "No one yet" && curObject.claimedUser != localStorage.getItem('curUser')){
-        curObject.class = "btn btn-secondary btn";
+        curObject.class = "btn btn-light btn";
         curObject.function = "checkClick(this.id)";
-        curObject.buttonText = "CANNOT CLAIM";
+        curObject.buttonText = "TAKEN - CANNOT CLAIM";
       }
 
       /*if (curObject.claimedUser != localStorage.getItem('curUser')) {
@@ -447,6 +447,9 @@ function claimClick(clicked_id) {
     snack.className = "show";
     setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
     postObject.claimedUser = localStorage.getItem("curUser");
+    //Set claimed user NOW
+    var claimedUserText = document.getElementById("claimedUser" + clicked_id);
+    claimedUserText.innerHTML = "Claimed by: " + postObject.claimedUser;
 
     //Set color NOW
     var thumbnail = document.getElementById("thumbnail" + clicked_id);
@@ -515,14 +518,16 @@ function unclaimClick(clicked_id) {
   //$("#" + postName).fadeOut(); //have claim disappear
   //$("#" + postName).remove();
 
+  var postObject = JSON.parse(localStorage.getItem(postName));
   //Set color NOW
   var thumbnail = document.getElementById("thumbnail" + clicked_id);
   thumbnail.style.backgroundColor = "white";
   //Set color FOREVER
   postObject.color = "white";
-
-  var postObject = JSON.parse(localStorage.getItem(postName));
   postObject.claimedUser = "No one yet";
+  //Set claimed user NOW
+  var claimedUserText = document.getElementById("claimedUser" + clicked_id);
+  claimedUserText.innerHTML = "Claimed by: " + postObject.claimedUser;
   snack.innerHTML = "You just UNclaimed " + postObject.user + "'s " + postObject.foodItem + ". "
     "\n" + postObject.user + " has been notified."
     snack.className = "show";
