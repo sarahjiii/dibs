@@ -8,6 +8,7 @@
     <a href="index.html"><button class="homeButton"><i class="fa fa-home"></i></button></a>
     <b class="title"> Dibs </b>
     <a href="posting.html"><button class="postButton"><i class="fa fa-edit"></i></button></a>
+
   </span>
 </header>
 
@@ -33,38 +34,48 @@
 </head>
 
 <body>
-  <div class="container">
+	<div class="container">
 		<!-- h1 through h6 are headers. The higher the number, the smaller the header -->
-		<!-- p means paragraph -->
+		<!-- p means paragraph
 		<div class="jumbotron">
-			<h1>Food Preferences</h1>
-      <p>Check all foods you <b>don't</b> eat</p>
-      <p><small>Foods with the ingredients you select will be filtered out of your home
-      screen</small> </p>
+		</div>-->
+    <br>
 
-			<div class="pref">
-				<input id="dairy" type="checkbox" name="pref" value="dairy"> Dairy<br>
-				<input id="peanuts" type="checkbox" name="pref" value="peanuts"> Peanuts<br>
-				<input id="pork" type="checkbox" name="pref" value="pork"> Pork<br>
-				<input id="chicken" type="checkbox" name="pref" value="chicken"> Chicken<br>
-				<input id="beef" type="checkbox" name="pref" value="beef"> Beef<br>
-        <input id="gluten" type="checkbox" name="pref" value="gluten"> Gluten<br>
-			</div>
-      <script>
-        var user = localStorage.getItem('curUser');
-        var userPrefs = JSON.parse(localStorage.getItem(user + "Prefs"));
-        for (var i = 0; i < userPrefs.length; i++) {
-          document.getElementById(userPrefs[i]).checked = true;
-        }
-      </script>
-			<p><a href="index.html"><button id="testjs" class="btn btn-primary
-      btn-lg" onclick="saveFoodPref()">Save</button></a></p>
-		</div>
+		<!-- divs are invisible structuring elements that stack vertically by default. Use them to organize your code -->
+		<!-- img tags are images. Lorem Pixel will deliver random images; handy! -->
+		<!-- a are anchors, also known as hyperlinks. Use the href attribute to tell the browser where to go when the user clicks -->
+
+  <script id="entry-template" type="text/x-handlebars-template">
+    <div class="post" id="post{{index}}">
+      <style>
+        #thumbnail{{index}} {background-color: {{color}};}
+      </style>
+      <div id="thumbnail{{index}}" class="thumbnail">
+        <p style="font-size:20px"><b>{{user}}</b></p>
+        <p>Location: {{loc}}</p>
+        <img src="{{imgsrc}}" class="img-thumbnail">
+          <p><b>{{foodItem}}</b></p>
+          <p>Contains: {{contains}}</p>
+          <p>Claim by: {{time}}</p>
+          <p id="claimedUser{{index}}">Claimed by: {{claimedUser}}</p>
+          <button id="{{index}}" type='button' class="{{class}}"
+          onclick="checkClick(this.id)">{{buttonText}}</button>
+        </a>
+  </div>
+</script>
+
+<div id="templatedPosts">
+  <!-- we will inject templated post HTML code into here -->
+</div>
+
+
+<div id="claimSnack">Error message...</div>
 
   <!-- include JavaScript near the end of the HTML file -->
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/introHCI.js"></script>
+  <script src="js/handlebars-v4.0.11.js"></script>
+	<script src="js/introHCI2.js"></script>
 
   <!-- Add icon library -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">

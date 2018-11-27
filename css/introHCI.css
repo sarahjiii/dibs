@@ -13,7 +13,7 @@
    the CSS to the page. feel free to remove it once the link is working. */
 body {
      border: 1px dotted gray;
-     padding: 20px;
+     padding: 10px;
 		 background-color:#EAD1DCFF;
 }
 
@@ -62,6 +62,10 @@ nav ul li a:hover {  color: #666; text-decoration:none;}
 nav a{text-decoration:none; color:#666;}
 nav a:hover{text-decoration:none; color:#666;}
 
+.thumbnail{
+	border-color: lightGrey;
+}
+
 .hamburger{
 	background-color: #ffffff00; /* Transparent background */
 	border: none; /* Remove borders */
@@ -97,6 +101,31 @@ nav a:hover{text-decoration:none; color:#666;}
 	font-size: 2.5em; /* Set a font size */
 	cursor: pointer; /* Mouse pointer on hover */
 	float:right;
+}
+
+.infoButton {
+	background-color: #ffffff00; /* Transparent background */
+	border: none; /* Remove borders */
+	color: black; /* Black */
+	font-size: 1.0em;
+	cursor: pointer; /* Mouse pointer on hover */
+}
+
+.info {
+	display: none;
+	font-size: 19px;
+	line-height: 22px;
+	color: black;
+}
+
+input[type='checkbox'] {
+  width:30px;
+  height:30px;
+  background:white;
+  border-radius:5px;
+  border:2px solid #555;
+	position:relative;
+	top: 6px;
 }
 
 #postSnack{
