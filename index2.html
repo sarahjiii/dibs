@@ -36,9 +36,10 @@
 <body>
 	<div class="container">
 		<!-- h1 through h6 are headers. The higher the number, the smaller the header -->
-		<!-- p means paragraph -->
+		<!-- p means paragraph
 		<div class="jumbotron">
-		</div>
+		</div>-->
+    <br>
 
 		<!-- divs are invisible structuring elements that stack vertically by default. Use them to organize your code -->
 		<!-- img tags are images. Lorem Pixel will deliver random images; handy! -->
@@ -46,7 +47,10 @@
 
   <script id="entry-template" type="text/x-handlebars-template">
     <div class="post" id="post{{index}}">
-      <a class="thumbnail">
+      <style>
+        #thumbnail{{index}} {background-color: {{color}};}
+      </style>
+      <div id="thumbnail{{index}}" class="thumbnail">
         <p style="font-size:20px"><b>{{user}}</b></p>
         <p>Location: {{loc}}</p>
         <img src="{{imgsrc}}" class="img-thumbnail">
@@ -55,13 +59,14 @@
           <p>Claim by: {{time}}</p>
           <button id="{{index}}" class="{{class}}"
           onclick="{{function}}">{{buttonText}}</button>
-        </a>
+      </div>
   </div>
 </script>
 
 <div id="templatedPosts">
   <!-- we will inject templated post HTML code into here -->
 </div>
+
 
 <div id="claimSnack">Error message...</div>
 

@@ -32,7 +32,8 @@ function initializePage() {
     'claimedUser': "No one yet",
     'class': "btn btn-success btn",
     'function': "claimClick(this.id)",
-    'buttonText': "CLAIM"};
+    'buttonText': "CLAIM",
+    'color': "white"};
 
   var post1 = {
     'index': 1,
@@ -45,7 +46,8 @@ function initializePage() {
     'claimedUser': "No one yet",
     'class': "btn btn-success btn",
     'function': "claimClick(this.id)",
-    'buttonText': "CLAIM"};
+    'buttonText': "CLAIM",
+    'color': "white"};
 
   if (!localStorage.getItem('post0') && !localStorage.getItem('claim0'))
     localStorage.setItem("post0", JSON.stringify(post0));
@@ -299,7 +301,8 @@ function postClick() {
     'claimedUser': "No one yet", //nobody has claimed it
     'class': "btn btn-success btn",
     'function': "claimClick(this.id)",
-    'buttonText': "CLAIM"};
+    'buttonText': "CLAIM",
+    'color': "white"};
   var postName = "post" + postIndex;
 
   localStorage.setItem(postName, JSON.stringify(postObject));
@@ -420,6 +423,13 @@ function claimClick(clicked_id) {
     snack.className = "show";
     setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
     postObject.claimedUser = localStorage.getItem("curUser");
+
+    //Set color NOW
+    var thumbnail = document.getElementById("thumbnail" + clicked_id);
+    thumbnail.style.backgroundColor = "#D0D0D0";
+    //Set color FOREVER
+    postObject.color = "#D0D0D0";
+
     localStorage.setItem(postName, JSON.stringify(postObject)); //add claim
     //localStorage.removeItem(postName); //remove post
 
@@ -470,8 +480,15 @@ function unclaimClick(clicked_id) {
   //var claimName = "claim" + clicked_id;
   var snack = document.getElementById("unclaimSnack");
 
-  $("#" + postName).fadeOut(); //have claim disappear
-  $("#" + postName).remove();
+  //$("#" + postName).fadeOut(); //have claim disappear
+  //$("#" + postName).remove();
+
+  //Set color NOW
+  var thumbnail = document.getElementById("thumbnail" + clicked_id);
+  thumbnail.style.backgroundColor = "white";
+  //Set color FOREVER
+  postObject.color = "white";
+
   var postObject = JSON.parse(localStorage.getItem(postName));
   postObject.claimedUser = "No one yet";
   snack.innerHTML = "You just UNclaimed " + postObject.user + "'s " + postObject.foodItem + ". "
