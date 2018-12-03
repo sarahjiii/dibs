@@ -53,14 +53,63 @@ header{
 	border-bottom:1px solid #dddddd;
 }
 
-nav{z-index:1000000; font-weight:bold; font-size:0.8em; width:100%; background:#f1f1f1;  position:absolute; text-align:center; font-size:12px;}
+/*nav{z-index:1000000; font-weight:bold; font-size:0.8em; width:100%; background:#f1f1f1;  position:absolute; text-align:center; font-size:12px;}
 nav ul {margin: 0; padding: 0; list-style-type: none; list-style-image: none;}
 nav li {display: block;   padding:15px 0 15px 0; border-bottom:#dddddd 1px solid;}
 nav li:hover{display: block;    background:#ffffff; padding:15px 0 15px 0; border-bottom:#dddddd 1px solid;}
 nav ul li a { text-decoration:none;  margin: 0px; color:#666;}
 nav ul li a:hover {  color: #666; text-decoration:none;}
 nav a{text-decoration:none; color:#666;}
-nav a:hover{text-decoration:none; color:#666;}
+nav a:hover{text-decoration:none; color:#666;}*/
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+#burger {
+	padding-left:0px;
+	padding-right:20px;
+}
+
+/*#main {
+    transition: margin-left .5s;
+    padding: 16px;
+}*/
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
 
 .thumbnail{
 	border-color: lightGrey;

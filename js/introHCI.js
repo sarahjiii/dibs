@@ -16,7 +16,7 @@ function initializePage() {
         || !localStorage.getItem("curPassword"))) {
     location.replace("login.html");
   }
-  $( "nav" ).hide();
+  //$( "nav" ).hide();
 
   hardcodeUsers();
 
@@ -52,9 +52,9 @@ function initializePage() {
   if (!localStorage.getItem('post1') && !localStorage.getItem('claim1'))
     localStorage.setItem("post1", JSON.stringify(post1));
 
-  $( ".hamburger" ).click(function() {
+  /*$( ".hamburger" ).click(function() {
       $( "nav" ).slideToggle( "slow", function() {});
-      });
+    });*/
 
 }
 
@@ -622,4 +622,12 @@ function showInfo(value) {
     else {
         x.style.display = 'block';
     }
+}
+
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
 }
