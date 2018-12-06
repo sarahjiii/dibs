@@ -344,6 +344,7 @@ function displayPosts(){
     if (curObject != null) { //&& curObject.claimedUser == "No one yet") {
       var curObjContains = curObject.contains.split(" and ");
       var containsAllergy = false;
+      var claimedAlready = false;
       if (curObject.user != localStorage.getItem('curUser')) {
         if (prefs != null) {
           for (var j = 0; j < curObjContains.length; j++) {
@@ -362,9 +363,10 @@ function displayPosts(){
       // if it's claimed by someone, and that someone != curUser, make the
       // button say CANNOT CLAIM
       if(curObject.claimedUser != "No one yet" && curObject.claimedUser != localStorage.getItem('curUser') && curObject.user != localStorage.getItem("curUser")){
-        curObject.class = "btn btn-light btn";
-        curObject.function = "checkClick(this.id)";
-        curObject.buttonText = "TAKEN - CANNOT CLAIM";
+        claimedAlready = true;
+        //curObject.class = "btn btn-light btn";
+        //curObject.function = "checkClick(this.id)";
+        //curObject.buttonText = "TAKEN - CANNOT CLAIM";
       }
 
       /*if (curObject.claimedUser != localStorage.getItem('curUser')) {
@@ -373,7 +375,7 @@ function displayPosts(){
         curObject.buttonText = "CLAIM";
       }*/
 
-      if (friends.includes(curObject.user) && !containsAllergy) {
+      if (friends.includes(curObject.user) && !containsAllergy && !claimedAlready) {
         var curHtml = template(curObject);
         parentDiv.prepend(curHtml);
       }
