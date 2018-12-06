@@ -339,7 +339,7 @@ function displayPosts(){
   for(var i = 0; i < postIndex; i++){
     var postId = "post" + i;
     var curObject = JSON.parse(localStorage.getItem(postId));
-    console.log("claimed user for post " + i + ": " + curObject.claimedUser);
+    //console.log("claimed user for post " + i + ": " + curObject.claimedUser);
     //Comment out second part of if for version B
     if (curObject != null) { //&& curObject.claimedUser == "No one yet") {
       var curObjContains = curObject.contains.split(" and ");
