@@ -20,7 +20,6 @@
   </span>
 </header>
 
-
 <head>
 	<title>Dibs App</title>
 	<meta charset="utf-8">
@@ -46,15 +45,19 @@
 
   <script id="entry-template" type="text/x-handlebars-template">
     <div class="post" id="post{{index}}">
-      <a class="thumbnail">
+      <style>
+        #thumbnail{{index}} {background-color: {{color}};}
+      </style>
+      <div id="thumbnail{{index}}" class="thumbnail">
         <p style="font-size:20px"><b>{{user}}</b></p>
         <p>Location: {{loc}}</p>
         <img src="{{imgsrc}}" class="img-thumbnail">
           <p><b>{{foodItem}}</b></p>
           <p>Contains: {{contains}}</p>
           <p>Claim by: {{time}}</p>
-          <button id="{{index}}" class="{{class}}"
-          onclick="{{function}}">{{buttonText}}</button>
+          <p id="claimedUser{{index}}">Claimed by: {{claimedUser}}</p>
+          <button id="{{index}}" type='button' class="{{class}}"
+          onclick="checkClick(this.id)">{{buttonText}}</button>
         </a>
   </div>
 </script>
@@ -63,13 +66,14 @@
   <!-- we will inject templated post HTML code into here -->
 </div>
 
+
 <div id="claimSnack">Error message...</div>
 
   <!-- include JavaScript near the end of the HTML file -->
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
   <script src="js/handlebars-v4.0.11.js"></script>
-	<script src="js/introHCI.js"></script>
+	<script src="js/introHCI2.js"></script>
 
   <!-- Add icon library -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">

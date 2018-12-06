@@ -515,19 +515,23 @@ function unclaimClick(clicked_id) {
   //var claimName = "claim" + clicked_id;
   var snack = document.getElementById("claimSnack");
 
-  //$("#" + postName).fadeOut(); //have claim disappear
+  if(location.href.includes("myclaims")) {
+    $("#" + postName).fadeOut(); //have claim disappear
+  }
   //$("#" + postName).remove();
 
   var postObject = JSON.parse(localStorage.getItem(postName));
   //Set color NOW
   var thumbnail = document.getElementById("thumbnail" + clicked_id);
-  thumbnail.style.backgroundColor = "white";
+  if (thumbnail != null)
+    thumbnail.style.backgroundColor = "white";
   //Set color FOREVER
   postObject.color = "white";
   postObject.claimedUser = "No one yet";
   //Set claimed user NOW
   var claimedUserText = document.getElementById("claimedUser" + clicked_id);
-  claimedUserText.innerHTML = "Claimed by: " + postObject.claimedUser;
+  if (claimedUserText != null)
+    claimedUserText.innerHTML = "Claimed by: " + postObject.claimedUser;
   snack.innerHTML = "You just UNclaimed " + postObject.user + "'s " + postObject.foodItem + ". "
     "\n" + postObject.user + " has been notified."
     snack.className = "show";
@@ -679,6 +683,14 @@ function showInfo(value) {
     else {
         x.style.display = 'block';
     }
+}
+
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
 }
 
 // checks what button is being clicked (claim/unclaim)
