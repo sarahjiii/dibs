@@ -339,11 +339,12 @@ function displayPosts(){
   for(var i = 0; i < postIndex; i++){
     var postId = "post" + i;
     var curObject = JSON.parse(localStorage.getItem(postId));
-    console.log("claimed user for post " + i + ": " + curObject.claimedUser);
+    //console.log("claimed user for post " + i + ": " + curObject.claimedUser);
     //Comment out second part of if for version B
     if (curObject != null) { //&& curObject.claimedUser == "No one yet") {
       var curObjContains = curObject.contains.split(" and ");
       var containsAllergy = false;
+      var claimedAlready = false;
       if (curObject.user != localStorage.getItem('curUser')) {
         if (prefs != null) {
           for (var j = 0; j < curObjContains.length; j++) {
@@ -362,9 +363,10 @@ function displayPosts(){
       // if it's claimed by someone, and that someone != curUser, make the
       // button say CANNOT CLAIM
       if(curObject.claimedUser != "No one yet" && curObject.claimedUser != localStorage.getItem('curUser') && curObject.user != localStorage.getItem("curUser")){
-        curObject.class = "btn btn-light btn";
-        curObject.function = "checkClick(this.id)";
-        curObject.buttonText = "TAKEN - CANNOT CLAIM";
+        claimedAlready = true;
+        //curObject.class = "btn btn-light btn";
+        //curObject.function = "checkClick(this.id)";
+        //curObject.buttonText = "TAKEN - CANNOT CLAIM";
       }
 
       /*if (curObject.claimedUser != localStorage.getItem('curUser')) {
@@ -373,7 +375,7 @@ function displayPosts(){
         curObject.buttonText = "CLAIM";
       }*/
 
-      if (friends.includes(curObject.user) && !containsAllergy) {
+      if (friends.includes(curObject.user) && !containsAllergy && !claimedAlready) {
         var curHtml = template(curObject);
         parentDiv.prepend(curHtml);
       }
@@ -515,19 +517,23 @@ function unclaimClick(clicked_id) {
   //var claimName = "claim" + clicked_id;
   var snack = document.getElementById("claimSnack");
 
-  //$("#" + postName).fadeOut(); //have claim disappear
+  if(location.href.includes("myclaims")) {
+    $("#" + postName).fadeOut(); //have claim disappear
+  }
   //$("#" + postName).remove();
 
   var postObject = JSON.parse(localStorage.getItem(postName));
   //Set color NOW
   var thumbnail = document.getElementById("thumbnail" + clicked_id);
-  thumbnail.style.backgroundColor = "white";
+  if (thumbnail != null)
+    thumbnail.style.backgroundColor = "white";
   //Set color FOREVER
   postObject.color = "white";
   postObject.claimedUser = "No one yet";
   //Set claimed user NOW
   var claimedUserText = document.getElementById("claimedUser" + clicked_id);
-  claimedUserText.innerHTML = "Claimed by: " + postObject.claimedUser;
+  if (claimedUserText != null)
+    claimedUserText.innerHTML = "Claimed by: " + postObject.claimedUser;
   snack.innerHTML = "You just UNclaimed " + postObject.user + "'s " + postObject.foodItem + ". "
     "\n" + postObject.user + " has been notified."
     snack.className = "show";
@@ -679,6 +685,14 @@ function showInfo(value) {
     else {
         x.style.display = 'block';
     }
+}
+
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
 }
 
 // checks what button is being clicked (claim/unclaim)

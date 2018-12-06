@@ -3,22 +3,22 @@
 <html>
 
 <header>
-	<span>
-		<button class="hamburger"><i class="fa fa-bars"></i></button>
-		<a href="index.html"><button class="homeButton"><i class="fa fa-home"></i></button></a>
-		<a href="posting.html"><button class="postButton"><i class="fa fa-edit"></i></button></a>
-	</span>
+  <span>
+    <!--<button class="hamburger"><i class="fa fa-bars"></i></button>-->
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="myposts.html">My Posts</a>
+      <a href="myclaims.html">My Claims</a>
+      <a href="friends.html">Friends</a>
+      <a href="foodpref.html">Food Preferences</a>
+      <a href="login.html" onclick="deleteUser()">Logout</a>
+    </div>
+<span id ="burger" style="font-size:40px;cursor:pointer" onclick="openNav()">&#9776; </span>
+    <a href="index.html"><button class="homeButton"><i class="fa fa-home"></i></button></a>
+    <a href="index.html"><img style="padding-bottom:15px" height="60" src="images/logo.png"/></a>
+    <a href="posting.html"><button class="postButton"><i class="fa fa-edit"></i></button></a>
+  </span>
 </header>
-
-<nav>
-  <ul>
-		<a href="myposts.html"><li>My Posts</li></a>
-    <a href="myclaims.html"><li>My Claims</li></a>
-    <a href="friends.html"><li>Friends</li></a>
-    <a href="foodpref.html"><li>Food Preferences</li></a>
-    <a href="login.html" onclick="deleteUser()"><li>Logout</li></a>
-  </ul>
-</nav>
 
 <head>
 	<title>Dibs App</title>
